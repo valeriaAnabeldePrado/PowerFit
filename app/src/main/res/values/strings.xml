@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">PowerFit</string>
+    <string name="logIn_SN">SIGN IN</string>
+    <string name="in">Olvidaste la contraseña?</string>
+    //Home
+    <string name="home_prof">Perfil administrador</string>
+    <string name="home_name">Bienvenido McLovin</string>
+    <string name="home_mail">admin@admin.com</string>
+    <string name="home_saludo">Hola McLovin! Gracias por impulsarán nuestro club hacia el éxito!</string>
+    <string name="home_security_edit">Seguridad</string>
+    <string name="home_profile_edit">Editar perfil</string>
+    //Botones
+    <string name="btnIn">Ingresar</string>
+    <string name="btn_send">Enviar</string>
+    <string name="btn_log_out">Salir</string>
+    //altImages
+    <string name="logo">imgLogo</string>
+    //inputs text
+    <string name="form_nameIn">Nombre del usuario</string>
+    <string name="form_PassIn">Contraseña</string>
+    <string name="form_mailRecovered">Ingresa tu mail</string>
+    //Modal Carteles
+    <string name="modal_recover_pass"> Intentaste muchas veces con una contraseña incorrecta. La olvidaste? Intenta recuperarla! </string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
