@@ -21,7 +21,8 @@
             android:paddingEnd="30dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="UseCompoundDrawables">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -39,7 +40,8 @@
                 android:layout_marginStart="60dp"
                 android:contentDescription="@string/logo"
                 android:paddingTop="20dp"
-                android:src="@drawable/logopowergris" />
+                android:src="@drawable/logopowergris"
+                />
         </LinearLayout>
 
 
@@ -83,12 +85,14 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                app:layout_constraintTop_toTopOf="parent"
+                android:contentDescription="@string/home_profite_layout">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:paddingStart="20dp"
+                    android:paddingEnd="0dp"
                     android:text="@string/home_name"
                     android:textColor="@color/pastelPurple"
                     android:textSize="26sp"
@@ -134,7 +138,8 @@
                     <ImageView
                         android:layout_width="110dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/logopowergris" />
+                        android:src="@drawable/logopowergris"
+                        android:contentDescription="@string/logo" />
                 </androidx.appcompat.widget.LinearLayoutCompat>
             </androidx.cardview.widget.CardView>
 
@@ -159,7 +164,9 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:src="@drawable/pass"
-                        app:tint="@color/white" />
+                        app:tint="@color/white"
+                        android:contentDescription="@string/logo"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -193,7 +200,9 @@
                         android:layout_width="35dp"
                         android:layout_height="35dp"
                         android:src="@drawable/user"
-                        app:tint="@color/violet" />
+                        app:tint="@color/violet"
+                        android:contentDescription="@string/logo"
+                        />
 
                     <TextView
                         android:layout_width="match_parent"
@@ -210,7 +219,7 @@
                 android:id="@+id/btn_log_out"
                 android:layout_width="match_parent"
                 android:layout_height="70dp"
-                android:layout_marginTop="50dp"
+                android:layout_marginTop="20dp"
                 android:background="@drawable/button_log_out"
                 android:drawableStart="@drawable/log_out"
                 android:paddingStart="20dp"
@@ -222,6 +231,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/cardView4" />
         </androidx.constraintlayout.widget.ConstraintLayout>

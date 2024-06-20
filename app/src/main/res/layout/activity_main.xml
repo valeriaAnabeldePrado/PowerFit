@@ -29,7 +29,7 @@
             android:id="@+id/bottom_navigation"
             style="@style/BottomNavigation"
             android:layout_width="match_parent"
-            android:layout_height="128dp"
+            android:layout_height="match_parent"
             app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_navigation" />
 

@@ -5,10 +5,18 @@
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 
-    <style name="BottomNavigation">
-        <item name="android:background">@color/violet</item>
+    <style name="BottomNavigationViewItemText" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textSize">10sp</item>
+        <item name="android:paddingTop">0dp</item>
+        <item name="android:paddingBottom">0dp</item>
+    </style>
+
+    <style name="BottomNavigation" parent="Widget.Design.BottomNavigationView">
         <item name="itemIconTint">@color/white</item>
         <item name="itemTextColor">@color/white</item>
+        <item name="android:background">@color/violet</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">0dp</item>
     </style>
 
     <style name="Theme.PowerFit" parent="Base.Theme.PowerFit" />

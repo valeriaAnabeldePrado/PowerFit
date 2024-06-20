@@ -9,6 +9,7 @@
     <string name="home_saludo">Hola McLovin! Gracias por impulsarán nuestro club hacia el éxito!</string>
     <string name="home_security_edit">Seguridad</string>
     <string name="home_profile_edit">Editar perfil</string>
+    <string name="home_profite_layout">Bienvenida e inicio de perfil</string>
     //Botones
     <string name="btnIn">Ingresar</string>
     <string name="btn_send">Enviar</string>
