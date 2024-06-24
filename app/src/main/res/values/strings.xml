@@ -4,6 +4,9 @@
     <string name="in">Olvidaste la contraseña?</string>
     //Home
     <string name="home_prof">Perfil administrador</string>
+    <string name="home_logOut">Esta seguro que desea salir de la sesión</string>
+    <string name="home_btn_volver">Quiero volver</string>
+    <string name="home_btn_logOut">Quiero salir</string>
     <string name="home_name">Bienvenido McLovin</string>
     <string name="home_mail">admin@admin.com</string>
     <string name="home_saludo">Hola McLovin! Gracias por impulsarán nuestro club hacia el éxito!</string>
@@ -16,7 +19,7 @@
     <string name="btn_log_out">Salir</string>
     //altImages
     <string name="logo">imgLogo</string>
-    //inputs text
+    //inputs text Login pages
     <string name="form_nameIn">Nombre del usuario</string>
     <string name="form_PassIn">Contraseña</string>
     <string name="form_mailRecovered">Ingresa tu mail</string>
