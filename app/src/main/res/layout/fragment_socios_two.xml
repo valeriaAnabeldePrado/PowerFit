@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pages.components.SociosFragmentTwo">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/gestion_fragmentDos"
+            android:textColor="@color/greyDos"
+            android:textSize="16sp"
+            android:layout_marginEnd="110dp"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/name_form"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="20dp"
+            android:hint="@string/gestion_form_domicilio">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/name_form_value"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_form_ligth_blue"
+                android:drawablePadding="15dp"
+                android:ems="15"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/lastN_form"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:hint="@string/gestion_form_nacimiento">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/lastN_form_value"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_form_ligth_blue"
+                android:drawablePadding="15dp"
+                android:ems="15"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/dni_form"
+            android:layout_width="320dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="15dp"
+            android:hint="@string/gestion_form_apto">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/dni_form_value"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/edit_text_form_ligth_blue"
+                android:drawablePadding="15dp"
+                android:ems="15"
+                android:inputType="text" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:text="@string/gestion_form_sociok"
+            android:textColor="@color/greyDos"
+            android:textSize="16sp"
+            android:layout_marginEnd="115dp"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_add"
+            android:layout_width="250dp"
+            android:layout_height="70dp"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/border_button_selector"
+            android:text="@string/btn_add"
+            android:textAllCaps="false"
+            android:textColor="@android:color/white"
+            android:textSize="18sp"
+            android:textStyle="normal"
+             />
+
+    </LinearLayout>
+
+</FrameLayout>

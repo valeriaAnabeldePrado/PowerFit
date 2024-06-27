@@ -9,14 +9,17 @@
     <string name="home_btn_logOut">Quiero salir</string>
     <string name="home_name">Bienvenido McLovin</string>
     <string name="home_mail">admin@admin.com</string>
-    <string name="home_saludo">Hola McLovin! Gracias por impulsarán nuestro club hacia el éxito!</string>
+    <string name="home_saludo">Hola McLovin! Gracias por impulsar nuestro club hacia el éxito!</string>
     <string name="home_security_edit">Seguridad</string>
     <string name="home_profile_edit">Editar perfil</string>
     <string name="home_profite_layout">Bienvenida e inicio de perfil</string>
     //Botones
     <string name="btnIn">Ingresar</string>
     <string name="btn_send">Enviar</string>
+    <string name="btn_add">Agregar</string>
     <string name="btn_log_out">Salir</string>
+    <string name="btn_socios_carnet">Emitir carnet</string>
+    <string name="btn_socios_carnet_ver">ver carnet</string>
     //altImages
     <string name="logo">imgLogo</string>
     //inputs text Login pages
@@ -27,4 +30,23 @@
     <string name="modal_recover_pass"> Intentaste muchas veces con una contraseña incorrecta. La olvidaste? Intenta recuperarla! </string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="pages_title">Panel de control general</string>
+    //----------------PAGES----------------//
+    //---------GESTION MIEMBROS-----------//
+    //-----------------------------------//
+    <string name="gestion_sub_title">Gestión de miembros</string>
+    <string name="gestion_fragmentUno">Datos personales</string>
+    <string name="gestion_fragmentDos">Otros datos</string>
+    //Form
+    <string name="gestion_form_name">Nombre</string>
+    <string name="gestion_form_lastName">Apellido</string>
+    <string name="gestion_form_dni">DNI</string>
+    <string name="gestion_form_mail">Correo</string>
+    <string name="gestion_form_domicilio">Domicilio</string>
+    <string name="gestion_form_nacimiento">Fecha de nacimiento</string>
+    <string name="gestion_form_apto">Subir apto físico</string>
+    <string name="gestion_form_sociok">Es socio?</string>
+
+
 </resources>

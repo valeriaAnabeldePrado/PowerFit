@@ -1,12 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
- <item android:id="@+id/home"
-     android:icon="@drawable/user"
-     android:title="Home"
-     />
-    <item android:id="@+id/cuota"
-        android:icon="@drawable/user"
-        android:title="Pago Couta"
-        />
 
+    <item android:id="@+id/miembros"
+        android:icon="@drawable/nav_miembos"
+        android:title="Miembros"
+        />
+    <item android:id="@+id/pagocuota"
+        android:icon="@drawable/nav_cuota"
+        android:title="Cuota"
+        />
+    <item android:id="@+id/home"
+        android:icon="@drawable/nav_home"
+        android:title="Home"
+        />
+    <item android:id="@+id/pagoactivi"
+        android:icon="@drawable/nav_activi"
+        android:title="Actividad"
+        />
+    <item android:id="@+id/listamorosos"
+        android:icon="@drawable/nav_morosos"
+        android:title="Morosos"
+        />
 </menu>

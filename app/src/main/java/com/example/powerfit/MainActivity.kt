@@ -9,8 +9,10 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import com.example.powerfit.databinding.ActivityMainBinding
 import com.example.powerfit.pages.navigation.Home
-import com.example.powerfit.pages.navigation.PagoCuota
-
+import com.example.powerfit.pages.navigation.ListaMorosos
+import com.example.powerfit.pages.navigation.PagoActividad
+import com.example.powerfit.pages.navigation.PagoCuotaMensual
+import com.example.powerfit.pages.navigation.socioAddOk
 
 
 class MainActivity : AppCompatActivity() {
@@ -33,8 +35,20 @@ class MainActivity : AppCompatActivity() {
                     replaceFragment(Home())
                     true
                 }
-                R.id.cuota -> {
-                    replaceFragment(PagoCuota())
+                R.id.miembros -> {
+                    replaceFragment(socioAddOk())
+                    true
+                }
+                R.id.pagocuota -> {
+                    replaceFragment(PagoCuotaMensual())
+                    true
+                }
+                R.id.pagoactivi -> {
+                    replaceFragment(PagoActividad())
+                    true
+                }
+                R.id.listamorosos ->{
+                    replaceFragment(ListaMorosos())
                     true
                 }
                 else -> false
@@ -43,7 +57,7 @@ class MainActivity : AppCompatActivity() {
         //val navigation = findViewById<BottomNavigationView>(R.id.bottom_navigation);
 
     }
-    private fun replaceFragment(fragment: Fragment) {
+    fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame_layout, fragment)

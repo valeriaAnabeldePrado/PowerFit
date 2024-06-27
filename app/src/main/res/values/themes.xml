@@ -15,7 +15,11 @@
         <item name="itemIconTint">@color/white</item>
         <item name="itemTextColor">@color/white</item>
         <item name="android:background">@color/violet</item>
-        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingEnd">10dp</item>
+        <item name="android:paddingStart">10dp</item>
+        <item name="iconSize">7dp</item>
+        <item name="android:textSize">5sp</item>
         <item name="android:paddingBottom">0dp</item>
     </style>
 

@@ -13,6 +13,9 @@
         android:theme="@style/Theme.PowerFit"
         tools:targetApi="31">
         <activity
+            android:name=".pages.components.PagoCuotaNotices"
+            android:exported="false" />
+        <activity
             android:name=".pages.loginErrorRecover.login_recovered_success"
             android:exported="false" />
         <activity
