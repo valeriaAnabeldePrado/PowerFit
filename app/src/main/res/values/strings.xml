@@ -18,6 +18,7 @@
     <string name="btn_send">Enviar</string>
     <string name="btn_add">Agregar</string>
     <string name="btn_log_out">Salir</string>
+    <string name="btn_pagar_card">Pagarr</string>
     <string name="btn_socios_carnet">Emitir carnet</string>
     <string name="btn_socios_carnet_ver">ver carnet</string>
     //altImages
@@ -28,7 +29,7 @@
     <string name="form_mailRecovered">Ingresa tu mail</string>
     //Modal Carteles
     <string name="modal_recover_pass"> Intentaste muchas veces con una contraseña incorrecta. La olvidaste? Intenta recuperarla! </string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="pages_title">Panel de control general</string>
@@ -48,5 +49,22 @@
     <string name="gestion_form_apto">Subir apto físico</string>
     <string name="gestion_form_sociok">Es socio?</string>
 
-
+    //----------------PAGES----------------//
+    //---------PAGO CUOTA MENSUAL---------//
+    //-----------------------------------//
+    <string name="pacocuota_sub_title">Pago mensual de la cuota</string>
+    <string name="pagocuota_subT">Datos del socio</string>
+    <string name="pagocuota_dni">DNI</string>
+    <string name="pagocuota_monto">Monto</string>
+    <string name="pagocuota_metodo">Método de pago</string>
+    <string name="pagocuota_pagocash">Efectivo</string>
+    <string name="pagocuota_pagocard">Tarjeta</string>
+    <string name="pagocuota_pagocard_title">Datos de la tarjeta</string>
+    //Form
+    <string name="pagocuota_pagocard_num">Número</string>
+    <string name="pagocuota_pagocard_desde">Desde</string>
+    <string name="pagocuota_pagocard_hasta">Hasta</string>
+    <string name="pagocuota_pagocard_nomape">Apellido y nombre</string>
+    <string name="pagocuota_pagocard_clave">Clave</string>
+    <string name="pagocuota_pagocard_cuotas">Cuotas</string>
 </resources>

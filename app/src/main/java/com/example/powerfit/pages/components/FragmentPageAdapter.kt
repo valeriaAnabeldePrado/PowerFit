@@ -6,19 +6,15 @@ import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class FragmentPageAdapter(
-    fragmentManager: FragmentManager, lifecycle: Lifecycle)
+    fragmentManager: FragmentManager, lifecycle: Lifecycle,  private val fragments: List<Fragment>)
     : FragmentStateAdapter(fragmentManager, lifecycle)
 {
     override fun getItemCount(): Int {
-        return 2
+        return fragments.size
     }
 
     override fun createFragment(position: Int): Fragment {
-        return if (position == 0){
-            SociosFragmentOne()
-        } else{
-            SociosFragmentTwo()
-        }
+        return fragments[position]
 
     }
 }

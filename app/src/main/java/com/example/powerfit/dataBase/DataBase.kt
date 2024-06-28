@@ -11,6 +11,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
     //objeto previo para pasar parametros simpre en mayuscula
     //USUARIO TABLA
     companion object{
+        //Tabla admin
         private const val TABLA_USUARIO = "usuario"
         private const val COLUMNA_ID = "id_usuario"
        private const val COLUMNA_NOMBRE = "nombre"

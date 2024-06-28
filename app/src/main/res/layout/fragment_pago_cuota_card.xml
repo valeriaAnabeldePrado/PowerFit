@@ -5,23 +5,23 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/fondo"
-    tools:context=".pages.navigation.socioAddOk">
+    tools:context=".pages.components.navModals.PagoCuotaCard">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingTop="3dp"
-       >
+        android:paddingTop="3dp">
 
         <ImageView
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:contentDescription="@string/logo"
-           android:layout_marginTop="5dp"
+            android:layout_marginTop="5dp"
             android:layout_marginEnd="20dp"
             android:src="@drawable/logopowergris"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:layout_editor_absoluteY="3dp" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -35,9 +35,12 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.49">
+            app:layout_constraintVertical_bias="0.49"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="99dp">
 
             <LinearLayout
+                android:id="@+id/linearLayout7"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_marginTop="68dp"
@@ -60,27 +63,36 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="@string/gestion_sub_title"
+                    android:text="@string/pacocuota_sub_title"
                     android:textSize="16sp" />
 
             </LinearLayout>
 
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="220dp"
+                android:layout_height="120dp"
+                android:contentDescription="@string/logo"
+                android:src="@drawable/tarjeta"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+
             <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPager2"
+                android:id="@+id/viewPagerCard"
                 android:layout_width="match_parent"
-                android:layout_height="410dp"
-                android:layout_marginTop="152dp"
+                android:layout_height="310dp"
+                android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
+android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:orientation="vertical"/>
+                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
-
-
 
 </FrameLayout>

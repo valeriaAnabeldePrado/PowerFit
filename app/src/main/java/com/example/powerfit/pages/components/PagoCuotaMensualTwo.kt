@@ -1,28 +1,24 @@
-package com.example.powerfit.pages.navigation
+package com.example.powerfit.pages.components
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.viewpager2.widget.ViewPager2
 import com.example.powerfit.R
-import com.example.powerfit.pages.components.FragmentPageAdapter
-import com.example.powerfit.pages.components.SociosFragmentOne
-import com.example.powerfit.pages.components.SociosFragmentTwo
 
-
+// TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [socioAddOk.newInstance] factory method to
+ * Use the [PagoCuotaMensualTwo.newInstance] factory method to
  * create an instance of this fragment.
  */
-class socioAddOk : Fragment() {
-
+class PagoCuotaMensualTwo : Fragment() {
+    // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
 
@@ -38,14 +34,8 @@ class socioAddOk : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_socio_add_ok, container, false)
-
-        val viewPager2: ViewPager2 = view.findViewById(R.id.viewPager2)
-        val fragments = listOf(SociosFragmentOne(), SociosFragmentTwo())
-        val adapter = FragmentPageAdapter(childFragmentManager, lifecycle, fragments)
-        viewPager2.adapter = adapter
-
-        return view
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_pago_cuota_mensual_two, container, false)
     }
 
     companion object {
@@ -55,12 +45,12 @@ class socioAddOk : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment PagoCuota.
+         * @return A new instance of fragment PagoCuotaMensualTwo.
          */
-
+        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            socioAddOk().apply {
+            PagoCuotaMensualTwo().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

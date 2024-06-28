@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import androidx.fragment.app.Fragment
+import com.example.powerfit.MainActivity
 import com.example.powerfit.R
+import com.example.powerfit.pages.components.navModals.PagoCuotaCard
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -34,8 +37,16 @@ class PagoCuotaMensual : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pago_cuota_mensual, container, false)
+        val view = inflater.inflate(R.layout.fragment_pago_cuota_mensual, container, false)
+        val btnCash : Button = view.findViewById(R.id.btn_card)
+        val mainPage = activity as? MainActivity
+
+        btnCash.setOnClickListener {
+            mainPage?.replaceFragment(PagoCuotaCard())
+        }
+
+
+        return view
     }
 
     companion object {
