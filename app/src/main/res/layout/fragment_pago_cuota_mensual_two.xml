@@ -36,36 +36,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/edit_text_form_ligth_blue"
-                android:drawablePadding="15dp"
                 android:ems="15"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
 
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/menu"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
+       <Spinner
+           android:id="@+id/spiner_option"
+           android:background="@drawable/edit_text_form_ligth_blue"
            android:layout_marginTop="10dp"
-            android:layout_width="320dp"
-            android:layout_height="60dp"
+           android:layout_width="320dp"
+           android:layout_height="60dp"
+           android:paddingStart="10dp"
+           android:pointerIcon="arrow"
+           >
 
-            android:hint="@string/pagocuota_pagocard_cuotas">
 
-            <AutoCompleteTextView
-                android:background="@drawable/edit_text_form_ligth_blue"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-
-                android:inputType="none"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
+       </Spinner>
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_pagar_cuota"
             android:layout_width="250dp"
             android:layout_height="70dp"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="40dp"
             android:background="@drawable/border_button_selector"
             android:text="@string/btn_pagar_card"
             android:textAllCaps="false"
