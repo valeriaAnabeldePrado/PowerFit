@@ -10,11 +10,14 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
     //objeto previo para pasar parametros simpre en mayuscula
     //USUARIO TABLA
     companion object{
+        //Tabla admin
         private const val TABLA_USUARIO = "usuario"
         private const val COLUMNA_ID = "id_usuario"
        private const val COLUMNA_NOMBRE = "nombre"
        private const val COLUMNA_EMAIL = "mail"
        private const val COLUMNA_PASS = "contrasena"
+       //Table persona
+
     }
     override fun onCreate(db: SQLiteDatabase?) {
         val createTableUsuario = "CREATE TABLE $TABLA_USUARIO ($COLUMNA_ID INTEGER PRIMARY KEY AUTOINCREMENT, $COLUMNA_NOMBRE TEXT, $COLUMNA_EMAIL TEXT, $COLUMNA_PASS TEXT)"
