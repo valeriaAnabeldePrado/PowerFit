@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
 import com.example.powerfit.R
 
@@ -34,8 +36,16 @@ class PagoCuotaMensualTwo : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pago_cuota_mensual_two, container, false)
+       val view = inflater.inflate(R.layout.fragment_pago_cuota_mensual_two, container, false)
+        val spiner : Spinner = view.findViewById(R.id.spiner_option)
+
+        val cuotas = arrayOf("Seleccionar las cuotas","1 Cuota", "3 Cuotas", "6 Cuotas")
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cuotas)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+        spiner.adapter = adapter
+
+        return view
     }
 
     companion object {
