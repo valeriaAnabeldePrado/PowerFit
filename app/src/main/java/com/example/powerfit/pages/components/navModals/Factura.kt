@@ -8,18 +8,18 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.powerfit.MainActivity
 import com.example.powerfit.R
+import com.example.powerfit.pages.navigation.Home
 
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-private var btnSendCarnet : Button? = null
 
 /**
  * A simple [Fragment] subclass.
- * Use the [SociosAddCarnetSend.newInstance] factory method to
+ * Use the [Factura.newInstance] factory method to
  * create an instance of this fragment.
  */
-class SociosAddCarnetSend : Fragment() {
+class Factura : Fragment() {
+
     private var param1: String? = null
     private var param2: String? = null
 
@@ -35,21 +35,17 @@ class SociosAddCarnetSend : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_socios_add_carnet_send, container, false)
-        btnSendCarnet = view.findViewById(R.id. btn_ver_carnet)
+      val view = inflater.inflate(R.layout.fragment_factura, container, false)
+
+        val btnVerFactura: Button = view.findViewById(R.id.boton_volver)
         val mainPage = activity as? MainActivity
 
-        btnSendCarnet?.setOnClickListener {
-            mainPage?.replaceFragment(Carnet())
+        btnVerFactura.setOnClickListener {
+            mainPage?.replaceFragment(Home())
         }
-
         return view
+    }
 
-    }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        btnSendCarnet = null
-    }
     companion object {
         /**
          * Use this factory method to create a new instance of
@@ -57,11 +53,12 @@ class SociosAddCarnetSend : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment SociosAddCarnetSend.
+         * @return A new instance of fragment Factura.
          */
+
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            SociosAddCarnetSend().apply {
+            Factura().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)

@@ -8,6 +8,7 @@ import android.widget.Button
 import androidx.fragment.app.Fragment
 import com.example.powerfit.MainActivity
 import com.example.powerfit.R
+import com.example.powerfit.pages.components.navModals.ConfimPagoCuotaMensual
 import com.example.powerfit.pages.components.navModals.PagoCuotaCard
 
 
@@ -38,11 +39,16 @@ class PagoCuotaMensual : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_pago_cuota_mensual, container, false)
-        val btnCash : Button = view.findViewById(R.id.btn_card)
+        val btnCard : Button = view.findViewById(R.id.btn_card)
+        val btnCash : Button = view.findViewById(R.id.btn_cash)
         val mainPage = activity as? MainActivity
 
+        btnCard.setOnClickListener {
+            mainPage?.replaceFragment(PagoCuotaCard.newInstance("Pago mensual de cuota"))
+        }
+
         btnCash.setOnClickListener {
-            mainPage?.replaceFragment(PagoCuotaCard())
+            mainPage?.replaceFragment(ConfimPagoCuotaMensual.newInstance("Pago mensual de cuota"))
         }
 
 
@@ -50,14 +56,7 @@ class PagoCuotaMensual : Fragment() {
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PagoCuotaMensual.
-         */
+
 
         @JvmStatic
         fun newInstance(param1: String, param2: String) =

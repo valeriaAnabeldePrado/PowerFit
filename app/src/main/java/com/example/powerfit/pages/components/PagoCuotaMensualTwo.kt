@@ -5,30 +5,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
+import android.widget.Button
 import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import com.example.powerfit.MainActivity
 import com.example.powerfit.R
+import com.example.powerfit.pages.components.navModals.ConfimPagoCuotaMensual
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+//El subTitulo que se pasa como parametro
+private const val ARG_PARAM_TITLE = "param_title"
+private var spiner: Spinner? = null
+private var btnPagar: Button? = null
 
-/**
- * A simple [Fragment] subclass.
- * Use the [PagoCuotaMensualTwo.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PagoCuotaMensualTwo : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var paramTitle: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            //El parametro a utilizar
+            paramTitle = it.getString(ARG_PARAM_TITLE)
         }
     }
 
@@ -37,33 +33,34 @@ class PagoCuotaMensualTwo : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
        val view = inflater.inflate(R.layout.fragment_pago_cuota_mensual_two, container, false)
-        val spiner : Spinner = view.findViewById(R.id.spiner_option)
-
+         spiner  = view.findViewById(R.id.spiner_option)
+         btnPagar  = view.findViewById(R.id.btn_pagar_cuota)
+        val mainPage = activity as? MainActivity
         val cuotas = arrayOf("Seleccionar las cuotas","1 Cuota", "3 Cuotas", "6 Cuotas")
 
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, cuotas)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
-        spiner.adapter = adapter
+        spiner?.adapter = adapter
+
+        btnPagar?.setOnClickListener {
+            mainPage?.replaceFragment(ConfimPagoCuotaMensual.newInstance(paramTitle!!))
+        }
 
         return view
     }
-
+    override fun onDestroyView() {
+        super.onDestroyView()
+        // Limpia las referencias a los objetos UI para prevenir fugas de memoria
+        spiner = null
+        btnPagar = null
+    }
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PagoCuotaMensualTwo.
-         */
-        // TODO: Rename and change types and number of parameters
+
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(paramTitle: String) =
             PagoCuotaMensualTwo().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(ARG_PARAM_TITLE, paramTitle)
                 }
             }
     }

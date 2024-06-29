@@ -17,9 +17,13 @@
     <string name="btnIn">Ingresar</string>
     <string name="btn_send">Enviar</string>
     <string name="btn_add">Agregar</string>
+    <string name="btn_confirm">Confirmar</string>
     <string name="btn_log_out">Salir</string>
     <string name="btn_pagar_card">Pagarr</string>
     <string name="btn_socios_carnet">Emitir carnet</string>
+    <string name="btn_emitir_factura">Emitir factura</string>
+    <string name="btn_ver_factura">Ver factura</string>
+    <string name="btn_volver">Volver</string>
     <string name="btn_socios_carnet_ver">ver carnet</string>
     //altImages
     <string name="logo">imgLogo</string>
@@ -39,6 +43,7 @@
     <string name="gestion_sub_title">Gestión de miembros</string>
     <string name="gestion_fragmentUno">Datos personales</string>
     <string name="gestion_fragmentDos">Otros datos</string>
+    <string name="gestion_carnet_enviado">Carnet enviado</string>
     //Form
     <string name="gestion_form_name">Nombre</string>
     <string name="gestion_form_lastName">Apellido</string>
@@ -60,6 +65,8 @@
     <string name="pagocuota_pagocash">Efectivo</string>
     <string name="pagocuota_pagocard">Tarjeta</string>
     <string name="pagocuota_pagocard_title">Datos de la tarjeta</string>
+    <string name="pagocuota_pagoconfirm_title">Confirmar pago</string>
+    <string name="pagocuota_factura_ok">Factura enviada</string>
     //Form
     <string name="pagocuota_pagocard_num">Número</string>
     <string name="pagocuota_pagocard_desde">Desde</string>
@@ -67,4 +74,18 @@
     <string name="pagocuota_pagocard_nomape">Apellido y nombre</string>
     <string name="pagocuota_pagocard_clave">Clave</string>
     <string name="pagocuota_pagocard_cuotas">Cuotas</string>
+    //----------------PAGES----------------//
+    //---------PAGO  DE ACTIVIDAD---------//
+    //-----------------------------------//
+    <string name="pagoActivi_sub_title">Pago de actividad</string>
+    <string name="pagoActivi_subT">Datos a ingresar</string>
+    <string name="pagoActivi_metodo">Método de pago</string>
+    <string name="pagoActivi_pagocash">Efectivo</string>
+    <string name="pagoActivi_pagocard">Tarjeta</string>
+    <string name="pagoActivi_pagocard_title">Datos de la tarjeta</string>
+    //Form
+    <string name="pagoActivi_dni">DNI</string>
+    <string name="pagoActivi_monto">Monto</string>
+    <string name="pagoActivi_activi">Seleccionar ctividades</string>
+   //datos repeti2
 </resources>

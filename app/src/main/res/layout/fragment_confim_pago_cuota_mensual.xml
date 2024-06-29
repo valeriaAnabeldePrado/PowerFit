@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@mipmap/fondo"
-    tools:context=".pages.components.navModals.PagoCuotaCard">
+    android:background="@mipmap/fondonotices"
+    tools:context=".pages.components.navModals.ConfimPagoCuotaMensual">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,8 +16,6 @@
             android:layout_width="100dp"
             android:layout_height="60dp"
             android:contentDescription="@string/logo"
-            android:layout_marginTop="5dp"
-            android:layout_marginEnd="20dp"
             android:src="@drawable/logopowergris"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -60,54 +58,79 @@
                     android:textStyle="bold" />
 
                 <TextView
-                    android:id="@+id/text_title_param"
+                    android:id="@+id/subtitulo_mensual"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="definir titulo segun cuota o actividad"
+                    android:text="ss"
                     android:textSize="16sp" />
 
             </LinearLayout>
-            <FrameLayout
-                android:id="@+id/card_flip"
-                android:layout_width="220dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
 
-                <FrameLayout
-                    android:id="@+id/card_face_front"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-                    <include
-                        layout="@layout/card_front"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-                </FrameLayout>
-                <FrameLayout
-                    android:id="@+id/card_face_back"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:visibility="gone">
-                    <include
-                        layout="@layout/card_back"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-                </FrameLayout>
-            </FrameLayout>
-
-
-            <androidx.viewpager2.widget.ViewPager2
-                android:id="@+id/viewPagerCard"
+            <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="310dp"
+                android:layout_height="400dp"
+                android:layout_marginTop="40dp"
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/card_flip" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:text="@string/pagocuota_pagoconfirm_title"
+                    android:textColor="@color/greyDos"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="300dp"
+                    android:layout_gravity="center"
+                    android:layout_height="240dp"
+                    android:layout_marginTop="30dp"
+                    android:layout_marginBottom="30dp"
+                    app:cardCornerRadius="30dp">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:layout_width="match_parent"
+                        android:background="@drawable/border_card_violet"
+                        android:layout_height="match_parent"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="30dp"
+                            android:text="Datos del pago para codear en kt"
+                            android:textAlignment="center"
+                            android:textColor="@color/greyDos"
+                            android:textSize="16sp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+                </androidx.cardview.widget.CardView>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_confirm_pago"
+                    android:layout_width="250dp"
+                    android:layout_height="70dp"
+                   android:layout_gravity="center"
+                    android:background="@drawable/border_button_selector"
+                    android:text="@string/btn_confirm"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white"
+                    android:textSize="18sp"
+                    android:textStyle="normal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+
+            </LinearLayout>
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

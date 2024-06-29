@@ -4,13 +4,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
+import android.widget.Button
+import android.widget.Spinner
 import androidx.fragment.app.Fragment
+import com.example.powerfit.MainActivity
 import com.example.powerfit.R
+import com.example.powerfit.pages.components.navModals.ConfimPagoCuotaMensual
+import com.example.powerfit.pages.components.navModals.PagoCuotaCard
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
+private var spiner : Spinner? = null
+private var btnCash : Button? = null
+private var btnCard : Button? = null
 /**
  * A simple [Fragment] subclass.
  * Use the [PagoActividad.newInstance] factory method to
@@ -32,8 +40,32 @@ class PagoActividad : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_pago_actividad, container, false)
+
+        val actividades = arrayOf("Musculación", "Crossfit", "Funcional", "Zumba")
+        val view = inflater.inflate(R.layout.fragment_pago_actividad, container, false)
+        spiner = view.findViewById(R.id.spiner_option_actividad)
+        btnCard = view.findViewById(R.id.btn_card_actividad)
+        btnCash = view.findViewById(R.id.btn_cash_actividad)
+        val mainPage = activity as? MainActivity
+
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, actividades)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_item)
+        spiner?.adapter = adapter
+
+        btnCash?.setOnClickListener {
+            mainPage?.replaceFragment(ConfimPagoCuotaMensual.newInstance("Pago de actividad"))
+        }
+        btnCard?.setOnClickListener {
+            mainPage?.replaceFragment(PagoCuotaCard.newInstance("Pago de actividad"))
+        }
+
+        return view
+    }
+    override fun onDestroyView() {
+        super.onDestroyView()
+        spiner = null
+        btnCash = null
+        btnCard = null
     }
 
     companion object {
