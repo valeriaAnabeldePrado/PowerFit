@@ -24,6 +24,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
        private const val COLUMNA_NOMBRE_MIEMBRO = "Nombre"
        private const val COLUMNA_APELLIDO = "Apellido"
        private const val COLUMNA_DNI = "DNI"
+       private const val COLUMNA_TELEFONO = "Telefono"
        private const val COLUMNA_ES_SOCIO = "EsSocio"
        private const val COLUMNA_CORREO = "Correo"
        private const val COLUMNA_DIRECCION = "Direccion"
@@ -77,6 +78,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
                 "$COLUMNA_NOMBRE_MIEMBRO TEXT, " +
                 "$COLUMNA_APELLIDO TEXT, " +
                 "$COLUMNA_DNI TEXT, " +
+                "$COLUMNA_TELEFONO INTEGER, " +
                 "$COLUMNA_ES_SOCIO INTEGER, " +
                 "$COLUMNA_CORREO TEXT, " +
                 "$COLUMNA_DIRECCION TEXT, " +
@@ -87,9 +89,10 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
         val miembroValues = arrayOf(
             ContentValues().apply {
                 put(COLUMNA_ID_MIEMBRO, 1001)
-                put(COLUMNA_NOMBRE, "Juan")
+                put(COLUMNA_NOMBRE_MIEMBRO, "Juan")
                 put(COLUMNA_APELLIDO, "Perez")
                 put(COLUMNA_DNI, "123456789")
+                put(COLUMNA_TELEFONO, "3813456789")
                 put(COLUMNA_ES_SOCIO, 1)
                 put(COLUMNA_CORREO, "juan.perez@hotmail.com")
                 put(COLUMNA_DIRECCION, "Calle D 123")
@@ -98,9 +101,10 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
             },
             ContentValues().apply {
                 put(COLUMNA_ID_MIEMBRO, 1002)
-                put(COLUMNA_NOMBRE, "Maria")
+                put(COLUMNA_NOMBRE_MIEMBRO, "Maria")
                 put(COLUMNA_APELLIDO, "Gomez")
                 put(COLUMNA_DNI, "987654321")
+                put(COLUMNA_TELEFONO, "3814456789")
                 put(COLUMNA_ES_SOCIO, 1)
                 put(COLUMNA_CORREO, "maria.gomez@gmail.com")
                 put(COLUMNA_DIRECCION, "Avenida Sarmiento 456")
@@ -109,9 +113,10 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
             },
             ContentValues().apply {
                 put(COLUMNA_ID_MIEMBRO, 1003)
-                put(COLUMNA_NOMBRE, "Carlos")
+                put(COLUMNA_NOMBRE_MIEMBRO, "Carlos")
                 put(COLUMNA_APELLIDO, "Rodriguez")
                 put(COLUMNA_DNI, "456789123")
+                put(COLUMNA_TELEFONO, "3815456789")
                 put(COLUMNA_ES_SOCIO, 0)
                 put(COLUMNA_CORREO, "carlos.rodriguez@gmail.com")
                 put(COLUMNA_DIRECCION, "Plaza Principal 980")
@@ -298,6 +303,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
         nombre: String,
         apellido: String,
         dni: String,
+        telefono: Int,
         esSocio: Boolean,
         correo: String,
         direccion: String,
@@ -330,7 +336,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
 
             // Insertar el nuevo miembro
             val insertMiembro = "INSERT INTO $TABLA_MIEMBRO " +
-                    "($COLUMNA_ID_MIEMBRO, $COLUMNA_NOMBRE, $COLUMNA_APELLIDO, $COLUMNA_DNI, " +
+                    "($COLUMNA_ID_MIEMBRO, $COLUMNA_NOMBRE_MIEMBRO, $COLUMNA_APELLIDO, $COLUMNA_DNI, $COLUMNA_TELEFONO " +
                     "$COLUMNA_ES_SOCIO, $COLUMNA_CORREO, $COLUMNA_DIRECCION, $COLUMNA_FECHA_NAC, " +
                     "$COLUMNA_APTO_MEDICO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
@@ -339,6 +345,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
                 nombre,
                 apellido,
                 dni,
+                telefono,
                 if (esSocio) 1 else 0,
                 correo,
                 direccion,
@@ -357,4 +364,42 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
         return respuesta
     }
 
+    data class MorososList(
+        val nombreCompleto: String,
+        val telefono: Int,
+        val correo: String,
+        val fechaVencimiento: String
+    )
+
+    fun mostrarSociosMorosos(): List<MorososList> {
+        val database = readableDatabase
+        val query = """
+        SELECT m.$COLUMNA_NOMBRE, m.$COLUMNA_APELLIDO, m.$COLUMNA_DNI, m.$COLUMNA_CORREO, MAX(c.$COLUMNA_FECHA_VENC) AS 'Fecha de Vencimiento'
+        FROM $TABLA_MIEMBRO m
+        INNER JOIN $TABLA_CUOTA c ON c.$COLUMNA_ID_MIEMBRO = m.$COLUMNA_ID_MIEMBRO
+        WHERE m.$COLUMNA_ES_SOCIO = 1
+        GROUP BY m.$COLUMNA_ID_MIEMBRO
+        HAVING MAX(c.$COLUMNA_FECHA_VENC) <= date('now')
+        ORDER BY MAX(c.$COLUMNA_FECHA_VENC)
+    """
+        val cursor = database.rawQuery(query, null)
+        val sociosMorosos = mutableListOf<MorososList>()
+
+        if (cursor.moveToFirst()) {
+            do {
+                val nombre = cursor.getString(cursor.getColumnIndexOrThrow(COLUMNA_NOMBRE))
+                val apellido = cursor.getString(cursor.getColumnIndexOrThrow(COLUMNA_APELLIDO))
+                val telefono = cursor.getString(cursor.getColumnIndexOrThrow(COLUMNA_TELEFONO))
+                val correo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMNA_CORREO))
+                val fechaVencimiento = cursor.getString(cursor.getColumnIndexOrThrow("Fecha de Vencimiento"))
+
+                val nombreCompleto = "$nombre $apellido"
+                sociosMorosos.add(MorososList(nombreCompleto, telefono.toInt(), correo, fechaVencimiento))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        database.close()
+
+        return sociosMorosos
+    }
 }
