@@ -6,8 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/fondo"
-    tools:context=".pages.loginErrorRecover.logIn_recoverPage">
-
+    tools:context=".pages.loginErrorRecover.LogInRecoveredOk">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -47,13 +46,13 @@
                 <ImageView
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/caritatriste" />
+                    android:src="@drawable/feli" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
-                    android:text="@string/modal_recover_pass"
+                    android:text="@string/modal_recover_code"
                     android:textAlignment="center"
                     android:textColor="@color/white"
                     android:textSize="20sp" />
@@ -65,17 +64,17 @@
             android:layout_width="350dp"
             android:layout_height="65dp"
             android:layout_marginTop="20dp"
-            android:hint="@string/form_mailRecovered"
+            android:hint="@string/form_codeP"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="@+id/linearLayout"
             app:passwordToggleTint="@color/greyDos"
-            app:startIconDrawable="@drawable/mail"
+
             app:startIconTint="@color/greyDos">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/mailuser_value"
+                android:id="@+id/value_code_in"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/edit_text_rounded"
@@ -96,7 +95,7 @@
             />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btn_send_mail"
+            android:id="@+id/btn_pass_code"
             android:layout_width="250dp"
             android:layout_height="70dp"
             android:layout_marginTop="40dp"

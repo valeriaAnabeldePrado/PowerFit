@@ -18,6 +18,7 @@
     <string name="btn_send">Enviar</string>
     <string name="btn_add">Agregar</string>
     <string name="btn_confirm">Confirmar</string>
+    <string name="btn_save">Guardar</string>
     <string name="btn_log_out">Salir</string>
     <string name="btn_pagar_card">Pagarr</string>
     <string name="btn_socios_carnet">Emitir carnet</string>
@@ -31,9 +32,13 @@
     <string name="form_nameIn">Nombre del usuario</string>
     <string name="form_PassIn">Contraseña</string>
     <string name="form_mailRecovered">Ingresa tu mail</string>
+    <string name="form_codeP">Código</string>
+    <string name="form_title_ress">Restablacer la contraseña</string>
+    <string name="form_pass_ress">Nueva contraseña</string>
+    <string name="form_pass_ress_Ok">Repite la contraseña</string>
     //Modal Carteles
-    <string name="modal_recover_pass"> Intentaste muchas veces con una contraseña incorrecta. La olvidaste? Intenta recuperarla! </string>
-
+    <string name="modal_recover_pass"> Olvidaste tu contraseña? Intenta recuperarla! Ingresa tu correo y revisa el codigo enviado</string>
+    <string name="modal_recover_code"> Ingresa el código de 4 dígitos</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="pages_title">Panel de control general</string>
@@ -75,7 +80,7 @@
     <string name="pagocuota_pagocard_clave">Clave</string>
     <string name="pagocuota_pagocard_cuotas">Cuotas</string>
     //----------------PAGES----------------//
-    //---------PAGO  DE ACTIVIDAD---------//
+    //---------PAGO DE ACTIVIDAD---------//
     //-----------------------------------//
     <string name="pagoActivi_sub_title">Pago de actividad</string>
     <string name="pagoActivi_subT">Datos a ingresar</string>
@@ -87,5 +92,11 @@
     <string name="pagoActivi_dni">DNI</string>
     <string name="pagoActivi_monto">Monto</string>
     <string name="pagoActivi_activi">Seleccionar ctividades</string>
-   //datos repeti2
+    //datos repeti2
+    //----------------PAGES----------------//
+    //-------------LISTA MOROSOS----------//
+    //-----------------------------------//
+    <string name="morosos_SUbT">Cuotas vencidas</string>
+    <string name="morosos_lista_subT">Detalle de vencimiento</string>
+    <string name="morosos_btn_notificar">NOTIFICAR</string>
 </resources>

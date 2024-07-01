@@ -2,7 +2,7 @@ package com.example.powerfit.pages
 
 import android.content.Intent
 import android.os.Bundle
-
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -29,6 +29,7 @@ class LogInPage : AppCompatActivity() {
         val btnIn = findViewById<AppCompatButton>(R.id.btn_sign_in)
         val nameEditText = findViewById<TextInputEditText>(R.id.nameuser_value)
         val passwordEditText = findViewById<TextInputEditText>(R.id.pasword_value)
+        val recoveredP = findViewById<TextView>(R.id.recupera_pass)
 
         //Base de datos en contexto
         dataBase = DataBase(this)
@@ -52,7 +53,10 @@ class LogInPage : AppCompatActivity() {
                         recoverPage()
                     }
                 }
-    }
+        }
+        recoveredP.setOnClickListener{
+            recoverPage()
+        }
 
 }
     //Navegación recuperar la contraseña
