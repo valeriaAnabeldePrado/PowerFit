@@ -59,10 +59,10 @@
             android:layout_width="320dp"
             android:layout_height="60dp"
             android:layout_marginTop="15dp"
-            android:hint="@string/gestion_form_apto">
+            android:hint="@string/gestion_telefono">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/dni_form_value"
+                android:id="@+id/tel_form_value"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@drawable/edit_text_form_ligth_blue"
@@ -70,16 +70,30 @@
                 android:ems="15"
                 android:inputType="text" />
         </com.google.android.material.textfield.TextInputLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:gravity="center"
+            android:layout_height="wrap_content">
+            <CheckBox
+                android:layout_marginRight="20dp"
+                android:id="@+id/check_es_socio"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Es socio"
+                android:textColor="@color/greyDos"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+            <CheckBox
+                android:id="@+id/check_apto_fisico"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:text="@string/gestion_apto_fisico"
+                android:textColor="@color/greyDos"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:text="@string/gestion_form_sociok"
-            android:textColor="@color/greyDos"
-            android:textSize="16sp"
-            android:layout_marginEnd="115dp"
-            android:textStyle="bold" />
+        </LinearLayout>
+
         <TextView
             android:id="@+id/add_socios_error_text"
             android:layout_width="match_parent"

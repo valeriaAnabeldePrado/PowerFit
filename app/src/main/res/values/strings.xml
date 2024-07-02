@@ -55,8 +55,9 @@
     <string name="gestion_form_mail">Correo</string>
     <string name="gestion_form_domicilio">Domicilio</string>
     <string name="gestion_form_nacimiento">Fecha de nacimiento</string>
-    <string name="gestion_form_apto">Subir apto físico</string>
+    <string name="gestion_telefono">Número telefónico</string>
     <string name="gestion_form_sociok">Es socio?</string>
+    <string name="gestion_apto_fisico">Tiene apto físico?</string>
 
     //----------------PAGES----------------//
     //---------PAGO CUOTA MENSUAL---------//

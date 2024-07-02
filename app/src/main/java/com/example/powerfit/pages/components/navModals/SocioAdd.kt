@@ -18,6 +18,7 @@ private const val DNI_SOCIO = "dni"
 private const val MAIL_SOCIO = "mail"
 private const val ADRESS_SOCIO = "direccion"
 private const val DATE_SOCIO = "fecha nacimiento"
+private const val SOCIO_CODE = "num socio"
 
 
 class SocioAdd : Fragment() {
@@ -28,6 +29,7 @@ class SocioAdd : Fragment() {
     private var paramMail: String? = null
     private var paramAdress: String? = null
     private var paramDate: String? = null
+    private var paramSocioCode: Int? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,7 +40,8 @@ class SocioAdd : Fragment() {
             paramDni = it.getString(DNI_SOCIO)
             paramMail = it.getString(MAIL_SOCIO)
             paramAdress = it.getString(ADRESS_SOCIO)
-            paramDate = it.getString(DATE_SOCIO)
+            paramSocioCode = it.getInt(SOCIO_CODE)
+
         }
     }
 
@@ -49,12 +52,12 @@ class SocioAdd : Fragment() {
         val view = inflater.inflate(R.layout.fragment_socio_add, container, false)
         val msjText : TextView = view.findViewById(R.id.msj_add_ok)
         Log.d("mensaje", "TEXTO $paramName, $paramLastN, $paramDate, $paramDni")
-        msjText.setText("Los datos de $paramName fueron cargados correctamente! Código número xxxxx. Ya podes enviarle su carnet")
+        msjText.setText("Los datos de $paramName fueron cargados correctamente! Código número $paramSocioCode. Ya podes enviarle su carnet")
         val btnEnviar : Button = view.findViewById(R.id.btn_enviar_carnet)
         val mainActivityPage = activity as? MainActivity
 
         btnEnviar.setOnClickListener{
-            mainActivityPage?.replaceFragment(Carnet.newInstance(paramName.toString(), paramLastN.toString(), paramDni.toString(), paramMail.toString()))
+            mainActivityPage?.replaceFragment(Carnet.newInstance(paramName.toString(), paramLastN.toString(), paramDni.toString(), paramMail.toString(), paramSocioCode!!))
         }
 
         return view
@@ -68,7 +71,8 @@ class SocioAdd : Fragment() {
             dniSocio: String,
             emailSocio: String,
             adressSocio: String,
-            dateSocio: String
+            dateSocio: String,
+            paramSocioCode : Int
         ) =
             SocioAdd().apply {
                 arguments = Bundle().apply {
@@ -78,6 +82,7 @@ class SocioAdd : Fragment() {
                     putString(MAIL_SOCIO, emailSocio)
                     putString(ADRESS_SOCIO, adressSocio)
                     putString(DATE_SOCIO, dateSocio)
+                    putInt(SOCIO_CODE, paramSocioCode)
                 }
             }
     }

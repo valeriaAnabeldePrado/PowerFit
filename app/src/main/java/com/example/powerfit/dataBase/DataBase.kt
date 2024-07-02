@@ -5,6 +5,7 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.util.Log
 
 class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 1) {
    //cuando la bd no exista y se crea por primera vez ya sea por iniciacion propia o por rellenado de datos
@@ -12,23 +13,24 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
     //USUARIO TABLA
     companion object{
         //Tabla admin
-        private const val TABLA_USUARIO = "usuario"
-        private const val COLUMNA_ID = "id_usuario"
-       private const val COLUMNA_NOMBRE = "nombre"
-       private const val COLUMNA_EMAIL = "mail"
-       private const val COLUMNA_PASS = "contrasena"
+        internal const val TABLA_USUARIO = "usuario"
+        internal const val COLUMNA_ID = "id_usuario"
+       internal const val COLUMNA_NOMBRE = "nombre"
+       internal const val COLUMNA_EMAIL = "mail"
+       internal const val COLUMNA_PASS = "contrasena"
 
        //tabla miembro
-       private const val TABLA_MIEMBRO = "miembro"
-       private const val COLUMNA_ID_MIEMBRO = "IDMiembro"
-       private const val COLUMNA_NOMBRE_MIEMBRO = "Nombre"
-       private const val COLUMNA_APELLIDO = "Apellido"
-       private const val COLUMNA_DNI = "DNI"
-       private const val COLUMNA_ES_SOCIO = "EsSocio"
-       private const val COLUMNA_CORREO = "Correo"
-       private const val COLUMNA_DIRECCION = "Direccion"
-       private const val COLUMNA_FECHA_NAC = "FechaNac"
-       private const val COLUMNA_APTO_MEDICO = "AptoMedico"
+       internal const val TABLA_MIEMBRO_PERSONA = "miembro"
+       internal const val COLUMNA_ID_MIEMBRO = "IDMiembro"
+       internal const val COLUMNA_NOMBRE_MIEMBRO = "Nombre"
+       internal const val COLUMNA_APELLIDO = "Apellido"
+       internal const val COLUMNA_DNI = "DNI"
+       internal const val COLUMNA_TELEFONO = "Telefono"
+       internal const val COLUMNA_ES_SOCIO = "EsSocio"
+       internal const val COLUMNA_CORREO = "Correo"
+       internal const val COLUMNA_DIRECCION = "Direccion"
+       internal const val COLUMNA_FECHA_NAC = "FechaNac"
+       internal const val COLUMNA_APTO_MEDICO = "AptoMedico"
 
        //tabla actividad
        private const val TABLA_ACTIVIDAD = "actividad"
@@ -56,40 +58,45 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
        private const val COLUMNA_ID_MIEMBRO_CUOTA = "IDMiembro"
     }
     override fun onCreate(db: SQLiteDatabase?) {
+
+
         val createTableUsuario = "CREATE TABLE $TABLA_USUARIO (" +
                 "$COLUMNA_ID INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "$COLUMNA_NOMBRE TEXT, " +
                 "$COLUMNA_EMAIL TEXT, " +
                 "$COLUMNA_PASS TEXT)"
-       //lanzar orden de creacion
-       db!!.execSQL(createTableUsuario)
-       val adminValuesConst = ContentValues().apply {
-           put(COLUMNA_NOMBRE, "McLovin")
-           put(COLUMNA_EMAIL, "mcLovin24@gmail.com")
-           put(COLUMNA_PASS, "alfajor24")
-       }
-       db.insert(TABLA_USUARIO, null, adminValuesConst)
+        db?.execSQL(createTableUsuario)
+        Log.d("Database", "Table $TABLA_USUARIO created.")
 
+        val adminValuesConst = ContentValues().apply {
+            put(COLUMNA_NOMBRE, "McLovin")
+            put(COLUMNA_EMAIL, "mcLovin24@gmail.com")
+            put(COLUMNA_PASS, "alfajor24")
+        }
+        db?.insert(TABLA_USUARIO, null, adminValuesConst)
+        Log.d("Database", "Admin user inserted.")
 
-        //crear tabla miembro
-        val createTableMiembro = "CREATE TABLE $TABLA_MIEMBRO (" +
+        val createTableMiembro = "CREATE TABLE $TABLA_MIEMBRO_PERSONA (" +
                 "$COLUMNA_ID_MIEMBRO INTEGER PRIMARY KEY, " +
                 "$COLUMNA_NOMBRE_MIEMBRO TEXT, " +
                 "$COLUMNA_APELLIDO TEXT, " +
                 "$COLUMNA_DNI TEXT, " +
+                "$COLUMNA_TELEFONO INTEGER, " +
                 "$COLUMNA_ES_SOCIO INTEGER, " +
                 "$COLUMNA_CORREO TEXT, " +
                 "$COLUMNA_DIRECCION TEXT, " +
                 "$COLUMNA_FECHA_NAC TEXT, " +
                 "$COLUMNA_APTO_MEDICO INTEGER)"
-        db.execSQL(createTableMiembro)
-        //insert miembro
+        db!!.execSQL(createTableMiembro)
+        Log.d("Database", "Table $TABLA_MIEMBRO_PERSONA created.")
+
         val miembroValues = arrayOf(
             ContentValues().apply {
                 put(COLUMNA_ID_MIEMBRO, 1001)
-                put(COLUMNA_NOMBRE, "Juan")
+                put(COLUMNA_NOMBRE_MIEMBRO, "Juan")
                 put(COLUMNA_APELLIDO, "Perez")
                 put(COLUMNA_DNI, "123456789")
+                put(COLUMNA_TELEFONO, "3813456789")
                 put(COLUMNA_ES_SOCIO, 1)
                 put(COLUMNA_CORREO, "juan.perez@hotmail.com")
                 put(COLUMNA_DIRECCION, "Calle D 123")
@@ -98,9 +105,10 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
             },
             ContentValues().apply {
                 put(COLUMNA_ID_MIEMBRO, 1002)
-                put(COLUMNA_NOMBRE, "Maria")
+                put(COLUMNA_NOMBRE_MIEMBRO, "Maria")
                 put(COLUMNA_APELLIDO, "Gomez")
                 put(COLUMNA_DNI, "987654321")
+                put(COLUMNA_TELEFONO, "3814456789")
                 put(COLUMNA_ES_SOCIO, 1)
                 put(COLUMNA_CORREO, "maria.gomez@gmail.com")
                 put(COLUMNA_DIRECCION, "Avenida Sarmiento 456")
@@ -109,9 +117,10 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
             },
             ContentValues().apply {
                 put(COLUMNA_ID_MIEMBRO, 1003)
-                put(COLUMNA_NOMBRE, "Carlos")
+                put(COLUMNA_NOMBRE_MIEMBRO, "Carlos")
                 put(COLUMNA_APELLIDO, "Rodriguez")
                 put(COLUMNA_DNI, "456789123")
+                put(COLUMNA_TELEFONO, "3815456789")
                 put(COLUMNA_ES_SOCIO, 0)
                 put(COLUMNA_CORREO, "carlos.rodriguez@gmail.com")
                 put(COLUMNA_DIRECCION, "Plaza Principal 980")
@@ -120,8 +129,9 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
             }
         )
         for (values in miembroValues) {
-            db.insert(TABLA_MIEMBRO, null, values)
+            db.insert(TABLA_MIEMBRO_PERSONA, null, values)
         }
+        Log.d("Database", "DATABASE Miembros inserted.")
 
         //crear tabla actividad
         val createTableActividad = "CREATE TABLE $TABLA_ACTIVIDAD (" +
@@ -171,7 +181,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
                 "$COLUMNA_ID_ACTIV_INSCRIP INTEGER, " +
                 "$COLUMNA_FECHA_INSC TEXT, " +
                 "$COLUMNA_FECHA_VENC TEXT, " +
-                "FOREIGN KEY($COLUMNA_ID_MIEMBRO_INSCRIP) REFERENCES $TABLA_MIEMBRO($COLUMNA_ID_MIEMBRO), " +
+                "FOREIGN KEY($COLUMNA_ID_MIEMBRO_INSCRIP) REFERENCES $TABLA_MIEMBRO_PERSONA($COLUMNA_ID_MIEMBRO), " +
                 "FOREIGN KEY($COLUMNA_ID_ACTIV_INSCRIP) REFERENCES $TABLA_ACTIVIDAD($COLUMNA_ID_ACTIV) " +
                 ")"
         db.execSQL(createTableInscripcion)
@@ -183,7 +193,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
                 "$COLUMNA_FECHA_PAGO TEXT, " +
                 "$COLUMNA_FECHA_VENC_CUOTA TEXT, " +
                 "$COLUMNA_ID_MIEMBRO_CUOTA INTEGER, " +
-                "FOREIGN KEY($COLUMNA_ID_MIEMBRO_CUOTA) REFERENCES $TABLA_MIEMBRO($COLUMNA_ID_MIEMBRO) " +
+                "FOREIGN KEY($COLUMNA_ID_MIEMBRO_CUOTA) REFERENCES $TABLA_MIEMBRO_PERSONA($COLUMNA_ID_MIEMBRO) " +
                 ")"
         db.execSQL(createTableCuota)
 
@@ -211,9 +221,9 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
     //Nombre, apellido, email, contrasena,id
   //Detecta una actualizacion nuemeros actuales de version o campos nuevos, solo para entorno de produccion xq borra datitos si no estan incorpora2
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db?.apply {
+        db!!.apply {
             execSQL("DROP TABLE IF EXISTS $TABLA_USUARIO")
-            execSQL("DROP TABLE IF EXISTS $TABLA_MIEMBRO")
+            execSQL("DROP TABLE IF EXISTS $TABLA_MIEMBRO_PERSONA")
             execSQL("DROP TABLE IF EXISTS $TABLA_ACTIVIDAD")
             execSQL("DROP TABLE IF EXISTS $TABLA_INSCRIPCION")
             execSQL("DROP TABLE IF EXISTS $TABLA_CUOTA")
@@ -227,8 +237,24 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
         val cursor = databasePower.rawQuery("SELECT * FROM $TABLA_USUARIO WHERE $COLUMNA_NOMBRE = '$username' AND $COLUMNA_PASS = '$userpassword'", null)
         val isValid = cursor.count > 0
         cursor.close()
-        databasePower.close()
+
         return isValid
+    }
+    fun obtenerNombresMiembros(): List<String> {
+        val nombres = mutableListOf<String>()
+        val databasePower = readableDatabase
+        val cursor = databasePower.rawQuery("SELECT ${DataBase.COLUMNA_NOMBRE_MIEMBRO} FROM ${DataBase.TABLA_MIEMBRO_PERSONA}", null)
+
+        if (cursor.moveToFirst()) {
+            do {
+                val nombre = cursor.getString(cursor.getColumnIndexOrThrow(DataBase.COLUMNA_NOMBRE_MIEMBRO))
+                nombres.add(nombre)
+            } while (cursor.moveToNext())
+        }
+
+        cursor.close()
+
+        return nombres
     }
 
     @SuppressLint("Range")
@@ -237,7 +263,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
         var respuesta = 0
 
         // Buscar el ID del miembro por DNI
-        val queryBuscarMiembro = "SELECT $COLUMNA_ID_MIEMBRO, $COLUMNA_ES_SOCIO FROM $TABLA_MIEMBRO WHERE $COLUMNA_DNI = ?"
+        val queryBuscarMiembro = "SELECT $COLUMNA_ID_MIEMBRO, $COLUMNA_ES_SOCIO FROM $TABLA_MIEMBRO_PERSONA WHERE $COLUMNA_DNI = ?"
         var miembroId: Int? = null
         var esSocio: Int? = null
 
@@ -298,6 +324,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
         nombre: String,
         apellido: String,
         dni: String,
+        telefono: Int,
         esSocio: Boolean,
         correo: String,
         direccion: String,
@@ -308,7 +335,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
         var respuesta = 0
 
         // Verificar si el miembro ya existe por correo o DNI
-        val queryExisteMiembro = "SELECT COUNT(*) FROM $TABLA_MIEMBRO WHERE $COLUMNA_CORREO = ? OR $COLUMNA_DNI = ?"
+        val queryExisteMiembro = "SELECT COUNT(*) FROM $TABLA_MIEMBRO_PERSONA WHERE $COLUMNA_CORREO = ? OR $COLUMNA_DNI = ?"
         var existe = 0
 
         database.rawQuery(queryExisteMiembro, arrayOf(correo, dni)).use { cursor ->
@@ -319,7 +346,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
 
         if (existe == 0) {
             // Obtener el próximo ID de miembro disponible
-            val queryNextID = "SELECT IFNULL(MAX($COLUMNA_ID_MIEMBRO), 0) + 1 FROM $TABLA_MIEMBRO"
+            val queryNextID = "SELECT IFNULL(MAX($COLUMNA_ID_MIEMBRO), 0) + 1 FROM $TABLA_MIEMBRO_PERSONA"
             var nuevoID = 1001 // Si no hay miembros, se inicia en 1001
 
             database.rawQuery(queryNextID, null).use { cursor ->
@@ -329,16 +356,17 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
             }
 
             // Insertar el nuevo miembro
-            val insertMiembro = "INSERT INTO $TABLA_MIEMBRO " +
-                    "($COLUMNA_ID_MIEMBRO, $COLUMNA_NOMBRE, $COLUMNA_APELLIDO, $COLUMNA_DNI, " +
-                    "$COLUMNA_ES_SOCIO, $COLUMNA_CORREO, $COLUMNA_DIRECCION, $COLUMNA_FECHA_NAC, " +
-                    "$COLUMNA_APTO_MEDICO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
+            val insertMiembro = "INSERT INTO $TABLA_MIEMBRO_PERSONA " +
+                    "($COLUMNA_ID_MIEMBRO, $COLUMNA_NOMBRE_MIEMBRO, $COLUMNA_APELLIDO, $COLUMNA_DNI, $COLUMNA_TELEFONO, " +
+                    "$COLUMNA_ES_SOCIO, $COLUMNA_CORREO, $COLUMNA_DIRECCION, $COLUMNA_FECHA_NAC, $COLUMNA_APTO_MEDICO) " +
+                    "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"
 
             val argsMiembro = arrayOf(
                 nuevoID.toString(),
                 nombre,
                 apellido,
                 dni,
+                telefono,
                 if (esSocio) 1 else 0,
                 correo,
                 direccion,
@@ -350,11 +378,50 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
 
             respuesta = nuevoID // Devolver el ID del nuevo miembro insertado
         } else {
-            respuesta = 1 // Devolver 1 si el miembro ya existe (según la lógica de MySQL)
+            respuesta = 1 // Devolver 1 si el miembro ya existe
         }
 
         database.close()
         return respuesta
+    }
+
+    data class MorososList(
+        val nombreCompleto: String,
+        val telefono: Int,
+        val correo: String,
+        val fechaVencimiento: String
+    )
+
+    fun mostrarSociosMorosos(): List<MorososList> {
+        val database = readableDatabase
+        val query = """
+        SELECT m.$COLUMNA_NOMBRE, m.$COLUMNA_APELLIDO, m.$COLUMNA_DNI, m.$COLUMNA_CORREO, MAX(c.$COLUMNA_FECHA_VENC) AS 'Fecha de Vencimiento'
+        FROM $TABLA_MIEMBRO_PERSONA m
+        INNER JOIN $TABLA_CUOTA c ON c.$COLUMNA_ID_MIEMBRO = m.$COLUMNA_ID_MIEMBRO
+        WHERE m.$COLUMNA_ES_SOCIO = 1
+        GROUP BY m.$COLUMNA_ID_MIEMBRO
+        HAVING MAX(c.$COLUMNA_FECHA_VENC) <= date('now')
+        ORDER BY MAX(c.$COLUMNA_FECHA_VENC)
+    """
+        val cursor = database.rawQuery(query, null)
+        val sociosMorosos = mutableListOf<MorososList>()
+
+        if (cursor.moveToFirst()) {
+            do {
+                val nombre = cursor.getString(cursor.getColumnIndexOrThrow(COLUMNA_NOMBRE))
+                val apellido = cursor.getString(cursor.getColumnIndexOrThrow(COLUMNA_APELLIDO))
+                val telefono = cursor.getString(cursor.getColumnIndexOrThrow(COLUMNA_TELEFONO))
+                val correo = cursor.getString(cursor.getColumnIndexOrThrow(COLUMNA_CORREO))
+                val fechaVencimiento = cursor.getString(cursor.getColumnIndexOrThrow("Fecha de Vencimiento"))
+
+                val nombreCompleto = "$nombre $apellido"
+                sociosMorosos.add(MorososList(nombreCompleto, telefono.toInt(), correo, fechaVencimiento))
+            } while (cursor.moveToNext())
+        }
+        cursor.close()
+        database.close()
+
+        return sociosMorosos
     }
 
 }

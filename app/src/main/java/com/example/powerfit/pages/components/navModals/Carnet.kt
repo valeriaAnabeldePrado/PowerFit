@@ -19,6 +19,7 @@ private const val NAME_SOCIO = "nombre"
 private const val LASTNAME_SOCIO = "apellido"
 private const val DNI_SOCIO = "dni"
 private const val MAIL_SOCIO = "mail"
+private const val SOCIO_CODE = "num socio"
 
 
 class Carnet : Fragment() {
@@ -27,6 +28,7 @@ class Carnet : Fragment() {
     private var paramLastN: String? = null
     private var paramDni: String? = null
     private var paramMail: String? = null
+    private var paramSocioCode: Int? = null
 
 
 
@@ -37,7 +39,7 @@ class Carnet : Fragment() {
             paramLastN = it.getString(LASTNAME_SOCIO)
             paramDni = it.getString(DNI_SOCIO)
             paramMail = it.getString(MAIL_SOCIO)
-
+            paramSocioCode = it.getInt(SOCIO_CODE)
 
         }
     }
@@ -47,18 +49,21 @@ class Carnet : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_carnet, container, false)
+
         val nameCarnet : TextView= view.findViewById(R.id.carnet_name)
         val dniCarnet : TextView= view.findViewById(R.id.carnet_dni)
+        val numSocio : TextView = view.findViewById(R.id.carnet_numero)
+
         val mailCarnet : TextView= view.findViewById(R.id.carnet_mail)
+
         val responseText: TextView = view.findViewById(R.id.response_text)
 
         nameCarnet.setText("$paramName $paramLastN")
         dniCarnet.text = paramDni
         mailCarnet.text = paramMail
+        numSocio.text = paramSocioCode.toString()
 
         val btnVerSendCarnet: Button = view.findViewById(R.id.boton_volver_home)
-
-
         btnVerSendCarnet.setOnClickListener {
             responseText.text = "Carnet enviado exitosamente!"
             viewLifecycleOwner.lifecycleScope.launch {
@@ -85,7 +90,7 @@ class Carnet : Fragment() {
                          lastNaSocio: String,
                          dniSocio: String,
                          emailSocio: String,
-
+                         paramSocioCode : Int
                         ) =
             Carnet().apply {
                 arguments = Bundle().apply {
@@ -93,7 +98,7 @@ class Carnet : Fragment() {
                     putString(LASTNAME_SOCIO, lastNaSocio)
                     putString(DNI_SOCIO, dniSocio)
                     putString(MAIL_SOCIO, emailSocio)
-
+                    putInt(SOCIO_CODE, paramSocioCode)
                 }
             }
     }
