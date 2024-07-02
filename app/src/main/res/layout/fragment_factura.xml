@@ -17,7 +17,7 @@
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_marginTop="80dp"
+            android:layout_marginTop="20dp"
             android:layout_height="match_parent">
 
             <TextView
@@ -37,8 +37,8 @@
             <androidx.cardview.widget.CardView
                 android:id="@+id/cardView5"
                 android:layout_width="350dp"
-                android:layout_marginTop="40dp"
-                android:layout_height="300dp"
+                android:layout_marginTop="20dp"
+                android:layout_height="450dp"
                 app:cardBackgroundColor="@color/violet"
                 app:cardCornerRadius="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -66,13 +66,81 @@
                         android:layout_gravity="start"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
+                    <View
+                        android:layout_width="fill_parent"
+                        android:layout_height="3dp"
+                        android:layout_marginTop="10dp"
+                        android:background="#fff" />
+
                     <TextView
+                        android:id="@+id/factura_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:text="datos de la factura"
-
                         android:layout_gravity="start"
+                        android:layout_marginTop="30dp"
+                        android:text="datos del carnet"
+                        android:textColor="@color/white"
+                        android:textSize="16sp"
+                        android:textStyle="bold" />
+
+                    <TextView
+                        android:id="@+id/factura_dni"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="datos del carnet"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/socio_numero"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="datos del carnet"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/factura_fecha_pago"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="datos del carnet"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/factura_fecha_vencimiento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="datos del carnet"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/factura_froma_pago"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="datos del carnet"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+                    <TextView
+                        android:id="@+id/factura_descuento"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="datos del carnet"
+                        android:textColor="@color/white"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/factura_total"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="start"
+                        android:text="datos del carnet"
                         android:textColor="@color/white"
                         android:textSize="16sp" />
                 </androidx.appcompat.widget.LinearLayoutCompat>

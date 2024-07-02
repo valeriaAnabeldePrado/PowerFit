@@ -40,9 +40,9 @@ class PassCodeOk : AppCompatActivity(), CoroutineScope by MainScope() {
         btnSavePass.setOnClickListener {
             val passNew = inputPass.text.toString()
             val passNewOk = inputPassOk.text.toString()
-            if (passNew == passNewOk) {
+            if (passNew == passNewOk && passNew != "") {
                 responseText.text = "La contraseña fue restablecida correctamente"
-                responseText.setTextColor(ContextCompat.getColor(this, android.R.color.darker_gray))
+                responseText.setTextColor(ContextCompat.getColor(this, android.R.color.holo_purple))
 
                 launch {
                     delay(3000)

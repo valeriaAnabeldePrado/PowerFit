@@ -15,7 +15,9 @@ import com.example.powerfit.pages.components.SociosFragmentTwo
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
-
+private lateinit var viewPager2: ViewPager2
+private lateinit var fragmentOne: SociosFragmentOne
+private lateinit var fragmentTwo: SociosFragmentTwo
 /**
  * A simple [Fragment] subclass.
  * Use the [socioAddOk.newInstance] factory method to
@@ -40,14 +42,20 @@ class socioAddOk : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_socio_add_ok, container, false)
 
-        val viewPager2: ViewPager2 = view.findViewById(R.id.viewPager2)
-        val fragments = listOf(SociosFragmentOne(), SociosFragmentTwo())
+        fragmentOne = SociosFragmentOne()
+        fragmentTwo = SociosFragmentTwo()
+
+        viewPager2 = view.findViewById(R.id.viewPager2)
+        val fragments = listOf(fragmentOne, fragmentTwo)
         val adapter = FragmentPageAdapter(childFragmentManager, lifecycle, fragments)
         viewPager2.adapter = adapter
 
         return view
     }
-
+    fun passDataToNextFragment(): SociosFragmentOne.SocioData {
+        val data = fragmentOne.getSocioData()
+        return data
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of

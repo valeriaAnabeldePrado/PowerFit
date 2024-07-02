@@ -102,15 +102,17 @@
                         android:orientation="vertical"
                         android:padding="20dp">
 
-
                         <TextView
+                            android:id="@+id/confirmaciondefactura"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="30dp"
-                            android:text="Datos del pago para codear en kt"
+                            android:text="D"
                             android:textAlignment="center"
                             android:textColor="@color/greyDos"
-                            android:textSize="16sp" />
+                            android:textSize="16sp"/>
+
+
                     </androidx.appcompat.widget.LinearLayoutCompat>
                 </androidx.cardview.widget.CardView>
 

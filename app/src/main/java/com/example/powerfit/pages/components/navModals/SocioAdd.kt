@@ -1,33 +1,44 @@
 package com.example.powerfit.pages.components.navModals
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.powerfit.MainActivity
 import com.example.powerfit.R
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+private const val NAME_SOCIO = "nombre"
+private const val LASTNAME_SOCIO = "apellido"
+private const val DNI_SOCIO = "dni"
+private const val MAIL_SOCIO = "mail"
+private const val ADRESS_SOCIO = "direccion"
+private const val DATE_SOCIO = "fecha nacimiento"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [SocioAdd.newInstance] factory method to
- * create an instance of this fragment.
- */
+
 class SocioAdd : Fragment() {
 
-    private var param1: String? = null
-    private var param2: String? = null
+    private var paramName: String? = null
+    private var paramLastN: String? = null
+    private var paramDni: String? = null
+    private var paramMail: String? = null
+    private var paramAdress: String? = null
+    private var paramDate: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            paramName = it.getString(NAME_SOCIO)
+            paramLastN = it.getString(LASTNAME_SOCIO)
+            paramDni = it.getString(DNI_SOCIO)
+            paramMail = it.getString(MAIL_SOCIO)
+            paramAdress = it.getString(ADRESS_SOCIO)
+            paramDate = it.getString(DATE_SOCIO)
         }
     }
 
@@ -36,33 +47,37 @@ class SocioAdd : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_socio_add, container, false)
-
+        val msjText : TextView = view.findViewById(R.id.msj_add_ok)
+        Log.d("mensaje", "TEXTO $paramName, $paramLastN, $paramDate, $paramDni")
+        msjText.setText("Los datos de $paramName fueron cargados correctamente! Código número xxxxx. Ya podes enviarle su carnet")
         val btnEnviar : Button = view.findViewById(R.id.btn_enviar_carnet)
         val mainActivityPage = activity as? MainActivity
 
         btnEnviar.setOnClickListener{
-            mainActivityPage?.replaceFragment(SociosAddCarnetSend())
+            mainActivityPage?.replaceFragment(Carnet.newInstance(paramName.toString(), paramLastN.toString(), paramDni.toString(), paramMail.toString()))
         }
 
         return view
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment SocioAdd.
-         */
-
         @JvmStatic
-        fun newInstance(param1: String, param2: String) =
+        fun newInstance(
+            nameSocio: String,
+            lastNaSocio: String,
+            dniSocio: String,
+            emailSocio: String,
+            adressSocio: String,
+            dateSocio: String
+        ) =
             SocioAdd().apply {
                 arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+                    putString(NAME_SOCIO, nameSocio)
+                    putString(LASTNAME_SOCIO, lastNaSocio)
+                    putString(DNI_SOCIO, dniSocio)
+                    putString(MAIL_SOCIO, emailSocio)
+                    putString(ADRESS_SOCIO, adressSocio)
+                    putString(DATE_SOCIO, dateSocio)
                 }
             }
     }

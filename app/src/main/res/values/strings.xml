@@ -25,7 +25,6 @@
     <string name="btn_emitir_factura">Emitir factura</string>
     <string name="btn_ver_factura">Ver factura</string>
     <string name="btn_volver">Volver</string>
-    <string name="btn_socios_carnet_ver">ver carnet</string>
     //altImages
     <string name="logo">imgLogo</string>
     //inputs text Login pages
@@ -38,7 +37,7 @@
     <string name="form_pass_ress_Ok">Repite la contraseña</string>
     //Modal Carteles
     <string name="modal_recover_pass"> Olvidaste tu contraseña? Intenta recuperarla! Ingresa tu correo y revisa el codigo enviado</string>
-    <string name="modal_recover_code"> Ingresa el código de 4 dígitos</string>
+    <string name="modal_recover_code"> Ingresa el código de seis dígitos</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <string name="pages_title">Panel de control general</string>

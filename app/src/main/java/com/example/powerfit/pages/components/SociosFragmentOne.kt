@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.powerfit.R
 
@@ -20,6 +21,10 @@ class SociosFragmentOne : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+    private lateinit var nameSocio: EditText
+    private lateinit var lastNSocio: EditText
+    private lateinit var dniSocio: EditText
+    private lateinit var mailSocio: EditText
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -32,10 +37,28 @@ class SociosFragmentOne : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_socios_one, container, false)
+        val view = inflater.inflate(R.layout.fragment_socios_one, container, false)
+
+        nameSocio = view.findViewById(R.id.name_form_value)
+        lastNSocio = view.findViewById(R.id.lastN_form_value)
+        dniSocio = view.findViewById(R.id.dni_form_value)
+        mailSocio = view.findViewById(R.id.email_form_value)
+
+
+
+        return view
     }
 
+    fun getSocioData(): SocioData {
+        return SocioData(
+            nameSocio.text.toString(),
+            lastNSocio.text.toString(),
+            dniSocio.text.toString(),
+            mailSocio.text.toString()
+        )
+    }
+
+    data class SocioData(val name: String, val lastName: String, val dni: String, val email: String)
     companion object {
         /**
          * Use this factory method to create a new instance of

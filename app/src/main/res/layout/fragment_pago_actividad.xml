@@ -89,7 +89,7 @@
                     android:textStyle="bold" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/pago_cuota_dni_form"
+                    android:id="@+id/pago_actividad_dni_form"
                     android:layout_width="320dp"
                     android:layout_height="60dp"
                     android:layout_gravity="center"
@@ -97,7 +97,7 @@
                     android:hint="@string/pagocuota_dni">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/lpago_cuota_dni_form_value"
+                        android:id="@+id/pago_actividad_dni_value"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/edit_text_form_ligth_blue"
@@ -127,7 +127,7 @@
                     android:hint="@string/pagocuota_monto">
 
                     <com.google.android.material.textfield.TextInputEditText
-                        android:id="@+id/lastN_form_value"
+                        android:id="@+id/pago_actividad_monto_value"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@drawable/edit_text_form_ligth_blue"
