@@ -20,6 +20,8 @@ private const val LASTNAME_SOCIO = "apellido"
 private const val DNI_SOCIO = "dni"
 private const val MAIL_SOCIO = "mail"
 private const val SOCIO_CODE = "num socio"
+private const val DATE = "fecha de inscripcion"
+private const val ES_SOCIO = "si es socio"
 
 
 class Carnet : Fragment() {
@@ -29,6 +31,7 @@ class Carnet : Fragment() {
     private var paramDni: String? = null
     private var paramMail: String? = null
     private var paramSocioCode: Int? = null
+    private var paramDate: String? = null
 
 
 
@@ -40,6 +43,7 @@ class Carnet : Fragment() {
             paramDni = it.getString(DNI_SOCIO)
             paramMail = it.getString(MAIL_SOCIO)
             paramSocioCode = it.getInt(SOCIO_CODE)
+            paramDate = it.getString(DATE)
 
         }
     }
@@ -55,13 +59,14 @@ class Carnet : Fragment() {
         val numSocio : TextView = view.findViewById(R.id.carnet_numero)
 
         val mailCarnet : TextView= view.findViewById(R.id.carnet_mail)
-
+        val dateCarnet : TextView= view.findViewById(R.id.carnet_fecha_inscripcion)
         val responseText: TextView = view.findViewById(R.id.response_text)
 
         nameCarnet.setText("$paramName $paramLastN")
         dniCarnet.text = paramDni
         mailCarnet.text = paramMail
         numSocio.text = paramSocioCode.toString()
+        dateCarnet.text = paramDate.toString()
 
         val btnVerSendCarnet: Button = view.findViewById(R.id.boton_volver_home)
         btnVerSendCarnet.setOnClickListener {
@@ -90,7 +95,8 @@ class Carnet : Fragment() {
                          lastNaSocio: String,
                          dniSocio: String,
                          emailSocio: String,
-                         paramSocioCode : Int
+                         paramSocioCode : Int,
+                         paramDate: String,
                         ) =
             Carnet().apply {
                 arguments = Bundle().apply {
@@ -99,6 +105,7 @@ class Carnet : Fragment() {
                     putString(DNI_SOCIO, dniSocio)
                     putString(MAIL_SOCIO, emailSocio)
                     putInt(SOCIO_CODE, paramSocioCode)
+                    putString(DATE, paramDate)
                 }
             }
     }

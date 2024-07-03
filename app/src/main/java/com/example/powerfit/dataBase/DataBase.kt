@@ -1,13 +1,12 @@
 package com.example.powerfit.dataBase
 
-import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
-class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 1) {
+class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 7) {
    //cuando la bd no exista y se crea por primera vez ya sea por iniciacion propia o por rellenado de datos
     //objeto previo para pasar parametros simpre en mayuscula
     //USUARIO TABLA
@@ -66,7 +65,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
                 "$COLUMNA_EMAIL TEXT, " +
                 "$COLUMNA_PASS TEXT)"
         db?.execSQL(createTableUsuario)
-        Log.d("Database", "Table $TABLA_USUARIO created.")
+
 
         val adminValuesConst = ContentValues().apply {
             put(COLUMNA_NOMBRE, "McLovin")
@@ -74,7 +73,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
             put(COLUMNA_PASS, "alfajor24")
         }
         db?.insert(TABLA_USUARIO, null, adminValuesConst)
-        Log.d("Database", "Admin user inserted.")
+
 
         val createTableMiembro = "CREATE TABLE $TABLA_MIEMBRO_PERSONA (" +
                 "$COLUMNA_ID_MIEMBRO INTEGER PRIMARY KEY, " +
@@ -88,7 +87,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
                 "$COLUMNA_FECHA_NAC TEXT, " +
                 "$COLUMNA_APTO_MEDICO INTEGER)"
         db!!.execSQL(createTableMiembro)
-        Log.d("Database", "Table $TABLA_MIEMBRO_PERSONA created.")
+        Log.d("Database", "TABLA DE MIEMBRO CREADA $TABLA_MIEMBRO_PERSONA created.")
 
         val miembroValues = arrayOf(
             ContentValues().apply {
@@ -131,7 +130,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
         for (values in miembroValues) {
             db.insert(TABLA_MIEMBRO_PERSONA, null, values)
         }
-        Log.d("Database", "DATABASE Miembros inserted.")
+
 
         //crear tabla actividad
         val createTableActividad = "CREATE TABLE $TABLA_ACTIVIDAD (" +
@@ -221,7 +220,7 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
     //Nombre, apellido, email, contrasena,id
   //Detecta una actualizacion nuemeros actuales de version o campos nuevos, solo para entorno de produccion xq borra datitos si no estan incorpora2
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
-        db!!.apply {
+        db?.apply {
             execSQL("DROP TABLE IF EXISTS $TABLA_USUARIO")
             execSQL("DROP TABLE IF EXISTS $TABLA_MIEMBRO_PERSONA")
             execSQL("DROP TABLE IF EXISTS $TABLA_ACTIVIDAD")
@@ -256,8 +255,21 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
 
         return nombres
     }
+    fun getTipoPago(dniMiembro: String): Int {
+        val databasePower = readableDatabase
+        val queryBuscarSiEsoNoSocio = "SELECT $COLUMNA_ES_SOCIO FROM $TABLA_MIEMBRO_PERSONA WHERE $COLUMNA_DNI = ?"
+        val cursor = databasePower.rawQuery(queryBuscarSiEsoNoSocio, arrayOf(dniMiembro))
 
-    @SuppressLint("Range")
+        var esSocio = 0
+        if (cursor.moveToFirst()) {
+            esSocio = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMNA_ES_SOCIO))
+        }
+        cursor.close()
+
+        return esSocio
+    }
+
+
     fun pagar(dniMiembro: String, monto: Double, fechaPago: String, tipoPago: Int): Int {
         val database = writableDatabase
         var respuesta = 0
@@ -269,8 +281,8 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
 
         database.rawQuery(queryBuscarMiembro, arrayOf(dniMiembro)).use { cursor ->
             if (cursor.moveToFirst()) {
-                miembroId = cursor.getInt(cursor.getColumnIndex(COLUMNA_ID_MIEMBRO))
-                esSocio = cursor.getInt(cursor.getColumnIndex(COLUMNA_ES_SOCIO))
+                miembroId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMNA_ID_MIEMBRO))
+                esSocio = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMNA_ES_SOCIO))
             }
         }
 
@@ -333,7 +345,11 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
     ): Int {
         val database = writableDatabase
         var respuesta = 0
-
+        try {
+            val queryExisteMiembro = "SELECT COUNT(*) FROM $TABLA_MIEMBRO_PERSONA WHERE $COLUMNA_CORREO = ? OR $COLUMNA_DNI = ?"
+        } catch (e: NumberFormatException) {
+            Log.d("mensaje", "------------------ERROR--------------- $e")
+        }
         // Verificar si el miembro ya existe por correo o DNI
         val queryExisteMiembro = "SELECT COUNT(*) FROM $TABLA_MIEMBRO_PERSONA WHERE $COLUMNA_CORREO = ? OR $COLUMNA_DNI = ?"
         var existe = 0

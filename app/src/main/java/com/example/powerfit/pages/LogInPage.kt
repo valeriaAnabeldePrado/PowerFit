@@ -1,10 +1,7 @@
 package com.example.powerfit.pages
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.widget.TextView
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.AppCompatButton
@@ -46,24 +43,24 @@ class LogInPage : AppCompatActivity() {
         btnIn.setOnClickListener{
             val userName = nameEditText.text.toString().trim()
             val password = passwordEditText.text.toString().trim()
-
-                if (dataBase.validarUsuarioOk(userName, password)) {
-                   navigator.navigationPages(this, MainActivity())
-                } else {
-                    appCounter -= 1
-                    if (appCounter > 0){
-                        Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
-                        errorName.setText("Correo incorrecto, vuelve a ingresar")
-                        errorPass.setText("Contraseña incorrecta, vuelve a ingresar")
-                        Handler(Looper.getMainLooper()).postDelayed({
-                            errorName.text = ""
-                            errorPass.text = ""
-                        }, 4000)
-                    } else {
-                        btnIn.isEnabled = false
-                        navigator.navigationPages(this,logIn_recoverPage())
-                    }
-                }
+            navigator.navigationPages(this, MainActivity())
+        //               if (dataBase.validarUsuarioOk(userName, password)) {
+//                   navigator.navigationPages(this, MainActivity())
+//                } else {
+//                    appCounter -= 1
+//                    if (appCounter > 0){
+//                        Toast.makeText(this, "Usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show()
+//                        errorName.setText("Correo incorrecto, vuelve a ingresar")
+//                        errorPass.setText("Contraseña incorrecta, vuelve a ingresar")
+//                        Handler(Looper.getMainLooper()).postDelayed({
+//                            errorName.text = ""
+//                            errorPass.text = ""
+//                        }, 4000)
+//                    } else {
+//                        btnIn.isEnabled = false
+//                        navigator.navigationPages(this,logIn_recoverPage())
+//                    }
+//                }
         }
         recoveredP.setOnClickListener{
             navigator.navigationPages(this,logIn_recoverPage())

@@ -1,6 +1,7 @@
 package com.example.powerfit.pages.navigation
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,6 +10,7 @@ import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.powerfit.MainActivity
 import com.example.powerfit.R
+import com.example.powerfit.dataBase.DataBase
 import com.example.powerfit.pages.components.navModals.ConfimPagoCuotaMensual
 import com.example.powerfit.pages.components.navModals.PagoCuotaCard
 
@@ -28,18 +30,21 @@ class PagoCuotaMensual : Fragment() {
 
     private var param1: String? = null
     private var param2: String? = null
+    private lateinit var databasePrueba: DataBase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        databasePrueba = DataBase(requireContext())
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
         }
     }
-
+    //dniMiembro: String, monto: Double, fechaPago: String, tipoPago: Int getTipoPago
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
+
     ): View? {
         val view = inflater.inflate(R.layout.fragment_pago_cuota_mensual, container, false)
         val btnCard : Button = view.findViewById(R.id.btn_card)
@@ -50,6 +55,7 @@ class PagoCuotaMensual : Fragment() {
 
         val mainPage = activity as? MainActivity
 
+
         btnCard.setOnClickListener {
             val payDataCard = getPayDataCard()
             mainPage?.replaceFragment(PagoCuotaCard.newInstance(payDataCard.paramTitle, payDataCard.montoCard, payDataCard.metodo, payDataCard.dni, numeroSocio))
@@ -57,6 +63,8 @@ class PagoCuotaMensual : Fragment() {
 
         btnCash.setOnClickListener {
             val payDataCash = getPayDataCash()
+            val obtenerTipoPago = databasePrueba.getTipoPago(payDataCash.dni)
+            Log.d("mensaje", "EL TIPO DE PAGO ES: $obtenerTipoPago")
             mainPage?.replaceFragment(ConfimPagoCuotaMensual.newInstance(payDataCash.paramTitle, payDataCash.montoCash, payDataCash.metodo, payDataCash.dni, paramCuotas = "0", numeroSocio))
         }
 

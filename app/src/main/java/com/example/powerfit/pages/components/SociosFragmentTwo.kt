@@ -15,11 +15,11 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.powerfit.MainActivity
 import com.example.powerfit.R
-import com.example.powerfit.dataBase.DatabasePrueba
+import com.example.powerfit.dataBase.DataBase
 import com.example.powerfit.pages.components.navModals.SocioAdd
 import com.example.powerfit.pages.navigation.socioAddOk
 
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
 private const val ARG_PARAM1 = "param1"
 private const val ARG_PARAM2 = "param2"
 private lateinit var domicilio: EditText
@@ -31,11 +31,12 @@ class SociosFragmentTwo : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
-    private lateinit var databasePrueba: DatabasePrueba
+    private lateinit var databasePrueba: DataBase
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        databasePrueba = DataBase(requireContext())
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
@@ -50,7 +51,7 @@ class SociosFragmentTwo : Fragment() {
        val view = inflater.inflate(R.layout.fragment_socios_two, container, false)
         //Inicio database
 
-        databasePrueba = DatabasePrueba(requireContext())
+
 
         domicilio = view.findViewById(R.id.add_frag_domicilio)
         fechaNac = view.findViewById(R.id.add_frag_fecha)
@@ -84,19 +85,19 @@ class SociosFragmentTwo : Fragment() {
 
 
 
-            val nombresUsuarios = databasePrueba.obtenerNombresUsuario()
+
+            val nombresUsuarios = databasePrueba.obtenerNombresMiembros()
             for (nombre in nombresUsuarios) {
                 Log.d("NombresMiembros", nombre)
             }
 
-            //val miembroAgregado = dataBase.nuevoMiembro(nameSocio,lastSocio, dniSocio, telefonoInt, esSocio, emailSocio, adressSocio, dateSocio, tieneApto)
-val miembroAgregado =0
-            //Log.d("muestra socio", "MUESTRA SOCIO: $nameSocio, $lastSocio, $dniSocio, $emailSocio")
+            Log.d("muestra socio", "MUESTRA SOCIO: $nameSocio, $lastSocio, $dniSocio, $emailSocio")
 
-            if(nameSocio != "" && adressSocio != "" && lastSocio != "" && dniSocio != "" && emailSocio != "" && dateSocio != "" && esSocio && tieneApto){
+            if(nameSocio != "" && adressSocio != "" && lastSocio != "" && dniSocio != "" && emailSocio != "" && dateSocio != "" && tieneApto){
+                val miembroAgregado = databasePrueba.nuevoMiembro(nameSocio,lastSocio, dniSocio, telefonoInt, esSocio, emailSocio, adressSocio, dateSocio, tieneApto)
                 if(miembroAgregado != 1){
                     socioaddOk?.passDataToNextFragment()
-                    activityPagina?.replaceFragment(SocioAdd.newInstance(nameSocio,lastSocio, dniSocio, emailSocio, adressSocio, dateSocio, miembroAgregado))
+                    activityPagina?.replaceFragment(SocioAdd.newInstance(nameSocio,lastSocio, dniSocio, emailSocio, adressSocio, dateSocio, miembroAgregado, esSocio))
                 } else{
                     textError.setText("Ups, el socio ya existe en nuestra base de datos!")
                     Handler(Looper.getMainLooper()).postDelayed({
