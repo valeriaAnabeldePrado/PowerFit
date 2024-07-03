@@ -6,124 +6,135 @@ import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
-class DatabasePrueba(context : Context) : SQLiteOpenHelper( context, "powerfitDos",null, 1) {
-    companion object{
-        //Tabla admin
-        const val TABLA_USUARIO = "usuario"
-         const val COLUMNA_ID = "id_usuario"
-      const val COLUMNA_NOMBRE = "nombre"
-      const val COLUMNA_EMAIL = "mail"
-      const val COLUMNA_PASS = "contrasena"
+class DatabasePrueba(context: Context) : SQLiteOpenHelper(context, "powerfitDos", null, 1) {
 
-        //tabla miembro
+    companion object {
+        // Table names
+        const val TABLA_USUARIO = "usuario"
         const val TABLA_MIEMBRO_PERSONA = "miembro"
+
+        // Column names for usuario table
+        const val COLUMNA_ID = "id_usuario"
+        const val COLUMNA_NOMBRE = "nombre"
+        const val COLUMNA_EMAIL = "mail"
+        const val COLUMNA_PASS = "contrasena"
+
+        // Column names for miembro table
         const val COLUMNA_ID_MIEMBRO = "IDMiembro"
-         const val COLUMNA_NOMBRE_MIEMBRO = "Nombre"
+        const val COLUMNA_NOMBRE_MIEMBRO = "Nombre"
         const val COLUMNA_APELLIDO = "Apellido"
-         const val COLUMNA_DNI = "DNI"
-       const val COLUMNA_TELEFONO = "Telefono"
+        const val COLUMNA_DNI = "DNI"
+        const val COLUMNA_TELEFONO = "Telefono"
         const val COLUMNA_ES_SOCIO = "EsSocio"
-     const val COLUMNA_CORREO = "Correo"
-      const val COLUMNA_DIRECCION = "Direccion"
-       const val COLUMNA_FECHA_NAC = "FechaNac"
-       const val COLUMNA_APTO_MEDICO = "AptoMedico"}
+        const val COLUMNA_CORREO = "Correo"
+        const val COLUMNA_DIRECCION = "Direccion"
+        const val COLUMNA_FECHA_NAC = "FechaNac"
+        const val COLUMNA_APTO_MEDICO = "AptoMedico"
+    }
 
     override fun onCreate(db: SQLiteDatabase?) {
-        val createTableUsuario = "CREATE TABLE ${DataBase.TABLA_USUARIO} (" +
-                "${DataBase.COLUMNA_ID} INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "${DataBase.COLUMNA_NOMBRE} TEXT, " +
-                "${DataBase.COLUMNA_EMAIL} TEXT, " +
-                "${DataBase.COLUMNA_PASS} TEXT)"
+        val createTableUsuario = """
+            CREATE TABLE $TABLA_USUARIO (
+                $COLUMNA_ID INTEGER PRIMARY KEY AUTOINCREMENT,
+                $COLUMNA_NOMBRE TEXT,
+                $COLUMNA_EMAIL TEXT,
+                $COLUMNA_PASS TEXT
+            )
+        """.trimIndent()
         db?.execSQL(createTableUsuario)
-        Log.d("Database", "Table ${DataBase.TABLA_USUARIO} created.")
+        Log.d("Database", "Table $TABLA_USUARIO created.")
 
         val adminValuesConst = ContentValues().apply {
-            put(DataBase.COLUMNA_NOMBRE, "McLovin")
-            put(DataBase.COLUMNA_EMAIL, "mcLovin24@gmail.com")
-            put(DataBase.COLUMNA_PASS, "alfajor24")
+            put(COLUMNA_NOMBRE, "McLovin")
+            put(COLUMNA_EMAIL, "mcLovin24@gmail.com")
+            put(COLUMNA_PASS, "alfajor24")
         }
-        db?.insert(DataBase.TABLA_USUARIO, null, adminValuesConst)
+        db?.insert(TABLA_USUARIO, null, adminValuesConst)
         Log.d("Database", "Admin user inserted.")
 
-        val createTableMiembro = "CREATE TABLE ${DataBase.TABLA_MIEMBRO_PERSONA} (" +
-                "${DataBase.COLUMNA_ID_MIEMBRO} INTEGER PRIMARY KEY, " +
-                "${DataBase.COLUMNA_NOMBRE_MIEMBRO} TEXT, " +
-                "${DataBase.COLUMNA_APELLIDO} TEXT, " +
-                "${DataBase.COLUMNA_DNI} TEXT, " +
-                "${DataBase.COLUMNA_TELEFONO} INTEGER, " +
-                "${DataBase.COLUMNA_ES_SOCIO} INTEGER, " +
-                "${DataBase.COLUMNA_CORREO} TEXT, " +
-                "${DataBase.COLUMNA_DIRECCION} TEXT, " +
-                "${DataBase.COLUMNA_FECHA_NAC} TEXT, " +
-                "${DataBase.COLUMNA_APTO_MEDICO} INTEGER)"
+        val createTableMiembro = """
+            CREATE TABLE $TABLA_MIEMBRO_PERSONA (
+                $COLUMNA_ID_MIEMBRO INTEGER PRIMARY KEY,
+                $COLUMNA_NOMBRE_MIEMBRO TEXT,
+                $COLUMNA_APELLIDO TEXT,
+                $COLUMNA_DNI TEXT,
+                $COLUMNA_TELEFONO TEXT,
+                $COLUMNA_ES_SOCIO INTEGER,
+                $COLUMNA_CORREO TEXT,
+                $COLUMNA_DIRECCION TEXT,
+                $COLUMNA_FECHA_NAC TEXT,
+                $COLUMNA_APTO_MEDICO INTEGER
+            )
+        """.trimIndent()
         db?.execSQL(createTableMiembro)
-        Log.d("Database", "Table ${DataBase.TABLA_MIEMBRO_PERSONA} created.")
+        Log.d("Database", "Table $TABLA_MIEMBRO_PERSONA created.")
 
         val miembroValues = arrayOf(
             ContentValues().apply {
-                put(DataBase.COLUMNA_ID_MIEMBRO, 1001)
-                put(DataBase.COLUMNA_NOMBRE_MIEMBRO, "Juan")
-                put(DataBase.COLUMNA_APELLIDO, "Perez")
-                put(DataBase.COLUMNA_DNI, "123456789")
-                put(DataBase.COLUMNA_TELEFONO, "3813456789")
-                put(DataBase.COLUMNA_ES_SOCIO, 1)
-                put(DataBase.COLUMNA_CORREO, "juan.perez@hotmail.com")
-                put(DataBase.COLUMNA_DIRECCION, "Calle D 123")
-                put(DataBase.COLUMNA_FECHA_NAC, "01/01/1990")
-                put(DataBase.COLUMNA_APTO_MEDICO, 1)
+                put(COLUMNA_ID_MIEMBRO, 1001)
+                put(COLUMNA_NOMBRE_MIEMBRO, "Juan")
+                put(COLUMNA_APELLIDO, "Perez")
+                put(COLUMNA_DNI, "123456789")
+                put(COLUMNA_TELEFONO, "3813456789")
+                put(COLUMNA_ES_SOCIO, 1)
+                put(COLUMNA_CORREO, "juan.perez@hotmail.com")
+                put(COLUMNA_DIRECCION, "Calle D 123")
+                put(COLUMNA_FECHA_NAC, "01/01/1990")
+                put(COLUMNA_APTO_MEDICO, 1)
             },
             ContentValues().apply {
-                put(DataBase.COLUMNA_ID_MIEMBRO, 1002)
-                put(DataBase.COLUMNA_NOMBRE_MIEMBRO, "Maria")
-                put(DataBase.COLUMNA_APELLIDO, "Gomez")
-                put(DataBase.COLUMNA_DNI, "987654321")
-                put(DataBase.COLUMNA_TELEFONO, "3814456789")
-                put(DataBase.COLUMNA_ES_SOCIO, 1)
-                put(DataBase.COLUMNA_CORREO, "maria.gomez@gmail.com")
-                put(DataBase.COLUMNA_DIRECCION, "Avenida Sarmiento 456")
-                put(DataBase.COLUMNA_FECHA_NAC, "15/05/1985")
-                put(DataBase.COLUMNA_APTO_MEDICO, 1)
+                put(COLUMNA_ID_MIEMBRO, 1002)
+                put(COLUMNA_NOMBRE_MIEMBRO, "Maria")
+                put(COLUMNA_APELLIDO, "Gomez")
+                put(COLUMNA_DNI, "987654321")
+                put(COLUMNA_TELEFONO, "3814456789")
+                put(COLUMNA_ES_SOCIO, 1)
+                put(COLUMNA_CORREO, "maria.gomez@gmail.com")
+                put(COLUMNA_DIRECCION, "Avenida Sarmiento 456")
+                put(COLUMNA_FECHA_NAC, "15/05/1985")
+                put(COLUMNA_APTO_MEDICO, 1)
             },
             ContentValues().apply {
-                put(DataBase.COLUMNA_ID_MIEMBRO, 1003)
-                put(DataBase.COLUMNA_NOMBRE_MIEMBRO, "Carlos")
-                put(DataBase.COLUMNA_APELLIDO, "Rodriguez")
-                put(DataBase.COLUMNA_DNI, "456789123")
-                put(DataBase.COLUMNA_TELEFONO, "3815456789")
-                put(DataBase.COLUMNA_ES_SOCIO, 0)
-                put(DataBase.COLUMNA_CORREO, "carlos.rodriguez@gmail.com")
-                put(DataBase.COLUMNA_DIRECCION, "Plaza Principal 980")
-                put(DataBase.COLUMNA_FECHA_NAC, "30/11/1988")
-                put(DataBase.COLUMNA_APTO_MEDICO, 1)
+                put(COLUMNA_ID_MIEMBRO, 1003)
+                put(COLUMNA_NOMBRE_MIEMBRO, "Carlos")
+                put(COLUMNA_APELLIDO, "Rodriguez")
+                put(COLUMNA_DNI, "456789123")
+                put(COLUMNA_TELEFONO, "3815456789")
+                put(COLUMNA_ES_SOCIO, 0)
+                put(COLUMNA_CORREO, "carlos.rodriguez@gmail.com")
+                put(COLUMNA_DIRECCION, "Plaza Principal 980")
+                put(COLUMNA_FECHA_NAC, "30/11/1988")
+                put(COLUMNA_APTO_MEDICO, 1)
             }
         )
         for (values in miembroValues) {
-            db?.insert(DataBase.TABLA_MIEMBRO_PERSONA, null, values)
+            db?.insert(TABLA_MIEMBRO_PERSONA, null, values)
         }
-
+        Log.d("Database", "Miembros inserted.")
     }
+
     override fun onUpgrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         db?.apply {
-            execSQL("DROP TABLE IF EXISTS ${DataBase.TABLA_MIEMBRO_PERSONA}")
+            execSQL("DROP TABLE IF EXISTS $TABLA_USUARIO")
+            execSQL("DROP TABLE IF EXISTS $TABLA_MIEMBRO_PERSONA")
             onCreate(this)
         }
     }
 
-
     fun obtenerNombresUsuario(): List<String> {
         val nombres = mutableListOf<String>()
         val databasePower = readableDatabase
-        val cursor = databasePower.rawQuery("SELECT ${DataBase.COLUMNA_NOMBRE} FROM ${DataBase.TABLA_USUARIO}", null)
+        val cursor = databasePower.rawQuery("SELECT $COLUMNA_NOMBRE FROM $TABLA_USUARIO", null)
 
         if (cursor.moveToFirst()) {
             do {
-                val nombre = cursor.getString(cursor.getColumnIndexOrThrow(DataBase.COLUMNA_NOMBRE_MIEMBRO))
+                val nombre = cursor.getString(cursor.getColumnIndexOrThrow(COLUMNA_NOMBRE))
                 nombres.add(nombre)
             } while (cursor.moveToNext())
         }
 
         cursor.close()
-
         return nombres
     }
 }
+
