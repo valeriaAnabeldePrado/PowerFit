@@ -18,7 +18,10 @@ private const val ARG_PARAM_TITLE = "param_title"
 private const val ARG_PARAM_MONTO = "param_monto"
 private const val ARG_PARAM_METODO = "param_metodo de pago"
 private const val ARG_PARAM_DNI = "param_dni_Socio"
-private const val SOCIO_O_MIEMBRO = "si es socio o miembro"
+private const val SOCIO_ID = "id socio"
+private const val ARG_FECHA_DE_PAGO = "param_cuotas"
+private const val ES_SOCIO_O_MIEMBRO = "socio o miembro"
+private const val PARAM_NOMBRE_APELLIDO = "param_nombre_apellido"
 
 
 private var spiner: Spinner? = null
@@ -26,10 +29,13 @@ private var btnPagar: Button? = null
 
 class PagoCuotaMensualTwo : Fragment() {
     private var paramTitle: String? = null
-    private var paramMonto: String? = null
+    private var paramMonto: Int? = null
     private var paramMetodo: String? = null
     private var paramDni: String? = null
-    private var paramSocioMiembro: String? = null
+    private var paramId: Int? = null
+    private var paramFechaPago: String? = null
+    private var paramSociooMiembro: Int? = null
+    private var paramnombApellido: String? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,10 +43,13 @@ class PagoCuotaMensualTwo : Fragment() {
         arguments?.let {
             //El parametro a utilizar
             paramTitle = it.getString(ARG_PARAM_TITLE)
-            paramMonto = it.getString(ARG_PARAM_MONTO)
+            paramMonto = it.getInt(ARG_PARAM_MONTO)
             paramMetodo = it.getString(ARG_PARAM_METODO)
             paramDni = it.getString(ARG_PARAM_DNI)
-            paramSocioMiembro= it.getString(SOCIO_O_MIEMBRO)
+            paramId= it.getInt(SOCIO_ID)
+            paramFechaPago = it.getString(ARG_FECHA_DE_PAGO)
+            paramSociooMiembro= it.getInt(ES_SOCIO_O_MIEMBRO)
+            paramnombApellido= it.getString(PARAM_NOMBRE_APELLIDO)
 
         }
     }
@@ -65,7 +74,7 @@ class PagoCuotaMensualTwo : Fragment() {
 
         btnPagar?.setOnClickListener {
             val selectedCuota = spiner?.selectedItem.toString()
-            mainPage?.replaceFragment(ConfimPagoCuotaMensual.newInstance(paramTitle!!, paramMonto.toString(),paramMetodo.toString(), paramDni.toString(), selectedCuota, paramSocioMiembro.toString() ))
+            mainPage?.replaceFragment(ConfimPagoCuotaMensual.newInstance(paramTitle!!, paramMonto!!,paramMetodo.toString(), paramDni.toString(), selectedCuota, paramId!!,paramFechaPago.toString(),paramSociooMiembro!!, paramnombApellido.toString() ))
         }
 
         return view
@@ -83,19 +92,25 @@ class PagoCuotaMensualTwo : Fragment() {
         @JvmStatic
         fun newInstance(
             paramTitle: String,
-            paramMonto: String,
+            paramMonto: Int,
             paramMetodo: String,
             paramDni: String,
-            paramSocioMiembro: String
+            paramId: Int,
+            paramFechaPago: String,
+            paramEsSocioMiembro: Int,
+            paramNombreyApellido : String
 
         ) =
             PagoCuotaMensualTwo().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM_TITLE, paramTitle)
-                    putString(ARG_PARAM_MONTO, paramMonto)
+                    putInt(ARG_PARAM_MONTO, paramMonto)
                     putString(ARG_PARAM_METODO, paramMetodo)
                     putString(ARG_PARAM_DNI, paramDni)
-                    putString(SOCIO_O_MIEMBRO, paramSocioMiembro)
+                    putInt(SOCIO_ID, paramId)
+                    putString(ARG_FECHA_DE_PAGO, paramFechaPago)
+                    putInt(ES_SOCIO_O_MIEMBRO, paramEsSocioMiembro)
+                    putString(PARAM_NOMBRE_APELLIDO, paramNombreyApellido)
 
                 }
             }

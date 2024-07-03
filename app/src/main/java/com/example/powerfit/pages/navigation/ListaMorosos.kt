@@ -35,30 +35,16 @@ class ListaMorosos : Fragment() {
     ): View? {
         val view = inflater.inflate(R.layout.fragment_lista_morosos, container, false)
         initRecyclerView(view)
-
-
-
-
-
         return view
     }
 
     private fun initRecyclerView(view: View) {
         val recyclerView: RecyclerView = view.findViewById(R.id.recicler_container)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
-        recyclerView.adapter = MorososAdapter(MorososList.morososListado)
+        recyclerView.adapter = MorososAdapter(MorososList.morososListado.toMutableList())
     }
 
     companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ListaMorosos.
-         */
-        // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
             ListaMorosos().apply {

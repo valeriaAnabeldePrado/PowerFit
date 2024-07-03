@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.example.powerfit.MainActivity
 import com.example.powerfit.R
+import com.example.powerfit.dataBase.DataBase
 
 
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -18,28 +19,38 @@ private const val ARG_PARAM_MONTO = "param_monto"
 private const val ARG_PARAM_METODO = "param_metodo de pago"
 private const val ARG_PARAM_DNI = "param_dni_Socio"
 private const val ARG_PARAM_CUOTAS = "param_cuotas"
-private const val SOCIO_O_MIEMBRO = "si es socio o miembro"
+private const val SOCIO_ID = "id socio"
+private const val ARG_FECHA_DE_PAGO = "param_cuotas"
+private const val ES_SOCIO_O_MIEMBRO = "socio o miembro"
+private const val PARAM_NOMBRE_APELLIDO = "param_nombre_apellido"
 
 
 class ConfimPagoCuotaMensual : Fragment() {
 
     private var paramTitle: String? = null
-    private var paramMonto: String? = null
+    private var paramMonto: Int? = null
     private var paramMetodo: String? = null
     private var paramDni: String? = null
     private var paramCuotas: String? = null
-    private var totalApagar: Int = 3000
-    private var paramSocioMiembro: String? = null
+    private var paramId: Int? = null
+    private var paramFechaPago: String? = null
+    private var paramSociooMiembro: Int? = null
+    private var paramnombApellido: String? = null
 
+    private lateinit var databasePrueba: DataBase
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        databasePrueba = DataBase(requireContext())
         arguments?.let {
             paramTitle = it.getString(ARG_PARAM_TITLE)
-            paramMonto = it.getString(ARG_PARAM_MONTO)
+            paramMonto = it.getInt(ARG_PARAM_MONTO)
             paramMetodo = it.getString(ARG_PARAM_METODO)
             paramDni = it.getString(ARG_PARAM_DNI)
             paramCuotas = it.getString(ARG_PARAM_CUOTAS)
-            paramSocioMiembro= it.getString(SOCIO_O_MIEMBRO)
+            paramId= it.getInt(SOCIO_ID)
+            paramFechaPago = it.getString(ARG_FECHA_DE_PAGO)
+            paramSociooMiembro= it.getInt(ES_SOCIO_O_MIEMBRO)
+            paramnombApellido= it.getString(PARAM_NOMBRE_APELLIDO)
         }
     }
 
@@ -53,23 +64,25 @@ class ConfimPagoCuotaMensual : Fragment() {
         val textTitle: TextView = view.findViewById(R.id.subtitulo_mensual)
         textTitle.text = paramTitle
         val confirmPagoText: TextView = view.findViewById(R.id.confirmaciondefactura)
-        Log.d(
-            "mensaje",
-            "NOMBRE,  NOMBRE Y APELLIDO, monto: $paramMonto, $paramSocioMiembro, DNI: $paramDni, Fecha de Pago:FECHA , Fecha de vencimiento: FECHA, Método de pago: $paramMetodo, Total con descuento: DESCUENTO"
-        )
+       val idMiembro = paramId.toString()
+        val socioMiembro = paramSociooMiembro.toString()
+        val montoDouble = paramMonto?.toDouble()
         confirmPagoText.text =
-            "NOMBRE Y APELLIDO, monto: $paramMonto, $paramSocioMiembro, DNI: $paramDni, Fecha de Pago:FECHA , Fecha de vencimiento: FECHA, Método de pago: $paramMetodo, Total con descuento: DESCUENTO"
+            "$paramnombApellido, monto: $paramMonto, $idMiembro, DNI: $paramDni, Fecha de Pago: $paramFechaPago , Método de pago: $paramMetodo, Total a pagar: $paramMonto"
         val mainPage = activity as? MainActivity
 
         btnConfirmPay.setOnClickListener {
+            val pagado = databasePrueba.realizarPago(paramId!!, montoDouble!!, paramFechaPago.toString(), paramSociooMiembro!!, paramSociooMiembro!!)
+            Log.d("mensaje","PAGO RESULTO: $pagado")
             mainPage?.replaceFragment(
                 ReConfirPagoCuotaOk.newInstance(
                     paramTitle!!,
                     paramMonto.toString(),
                     paramMetodo.toString(),
                     paramDni.toString(),
-                    totalApagar,
-                    paramSocioMiembro.toString()
+                    socioMiembro,
+                    paramnombApellido.toString(),
+                    paramFechaPago.toString()
                 )
             )
         }
@@ -83,21 +96,26 @@ class ConfimPagoCuotaMensual : Fragment() {
         @JvmStatic
         fun newInstance(
             paramTitle: String,
-            paramMonto: String,
+            paramMonto: Int,
             paramMetodo: String,
             paramDni: String,
             paramCuotas: String,
-            paramSocioMiembro: String
+            paramId: Int,
+            paramFechaPago: String,
+            paramEsSocioMiembro: Int,
+            paramNombreyApellido : String
         ) =
             ConfimPagoCuotaMensual().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM_TITLE, paramTitle)
-                    putString(ARG_PARAM_MONTO, paramMonto)
+                    putInt(ARG_PARAM_MONTO, paramMonto)
                     putString(ARG_PARAM_METODO, paramMetodo)
                     putString(ARG_PARAM_DNI, paramDni)
                     putString(ARG_PARAM_CUOTAS, paramCuotas)
-                    putString(SOCIO_O_MIEMBRO, paramSocioMiembro)
-
+                    putInt(SOCIO_ID, paramId)
+                    putString(ARG_FECHA_DE_PAGO, paramFechaPago)
+                    putInt(ES_SOCIO_O_MIEMBRO, paramEsSocioMiembro)
+                    putString(PARAM_NOMBRE_APELLIDO, paramNombreyApellido)
                 }
             }
     }

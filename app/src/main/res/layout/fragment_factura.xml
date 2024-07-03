@@ -111,23 +111,7 @@
                         android:textSize="16sp" />
 
                     <TextView
-                        android:id="@+id/factura_fecha_vencimiento"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:text="datos del carnet"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-                    <TextView
                         android:id="@+id/factura_froma_pago"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="start"
-                        android:text="datos del carnet"
-                        android:textColor="@color/white"
-                        android:textSize="16sp" />
-                    <TextView
-                        android:id="@+id/factura_descuento"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="start"

@@ -62,6 +62,7 @@
     //----------------PAGES----------------//
     //---------PAGO CUOTA MENSUAL---------//
     //-----------------------------------//
+
     <string name="pacocuota_sub_title">Pago mensual de la cuota</string>
     <string name="pagocuota_subT">Datos del socio</string>
     <string name="pagocuota_dni">DNI</string>

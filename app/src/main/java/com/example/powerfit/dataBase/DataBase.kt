@@ -1,12 +1,13 @@
 package com.example.powerfit.dataBase
 
+import android.annotation.SuppressLint
 import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.util.Log
 
-class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 7) {
+class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 22) {
    //cuando la bd no exista y se crea por primera vez ya sea por iniciacion propia o por rellenado de datos
     //objeto previo para pasar parametros simpre en mayuscula
     //USUARIO TABLA
@@ -200,8 +201,8 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
         val cuotaValues = arrayOf(
             ContentValues().apply {
                 put(COLUMNA_MONTO, 7800.0)
-                put(COLUMNA_FECHA_PAGO, "2023-10-29")
-                put(COLUMNA_FECHA_VENC_CUOTA, "2023-11-28")
+                put(COLUMNA_FECHA_PAGO, "2024-07-03")
+                put(COLUMNA_FECHA_VENC_CUOTA, "2024-06-03")
                 put(COLUMNA_ID_MIEMBRO_CUOTA, 1001)
             },
             ContentValues().apply {
@@ -269,68 +270,92 @@ class DataBase(context : Context) : SQLiteOpenHelper( context, "powerfit",null, 
         return esSocio
     }
 
+    fun nombreyApellido(dniMiembro: String): String {
+        val databasePower = readableDatabase
+        val queryBuscarNombreApellido = "SELECT $COLUMNA_NOMBRE_MIEMBRO, $COLUMNA_APELLIDO FROM $TABLA_MIEMBRO_PERSONA WHERE $COLUMNA_DNI = ?"
+        val cursor = databasePower.rawQuery(queryBuscarNombreApellido, arrayOf(dniMiembro))
 
-    fun pagar(dniMiembro: String, monto: Double, fechaPago: String, tipoPago: Int): Int {
-        val database = writableDatabase
-        var respuesta = 0
+        var nombreCompleto = ""
+        if (cursor.moveToFirst()) {
+            val nombre = cursor.getString(cursor.getColumnIndexOrThrow(COLUMNA_NOMBRE_MIEMBRO))
+            val apellido = cursor.getString(cursor.getColumnIndexOrThrow(COLUMNA_APELLIDO))
+            nombreCompleto = "$nombre $apellido"
+        }
+        cursor.close()
 
-        // Buscar el ID del miembro por DNI
-        val queryBuscarMiembro = "SELECT $COLUMNA_ID_MIEMBRO, $COLUMNA_ES_SOCIO FROM $TABLA_MIEMBRO_PERSONA WHERE $COLUMNA_DNI = ?"
-        var miembroId: Int? = null
-        var esSocio: Int? = null
+        return nombreCompleto
+    }
 
-        database.rawQuery(queryBuscarMiembro, arrayOf(dniMiembro)).use { cursor ->
+    fun socioExiste(dniMiembro: String): Int{
+        val databasePower = readableDatabase
+        val queryBuscarSiEsoNoSocio = "SELECT $COLUMNA_ID_MIEMBRO FROM $TABLA_MIEMBRO_PERSONA WHERE $COLUMNA_DNI = ?"
+        val cursor = databasePower.rawQuery(queryBuscarSiEsoNoSocio, arrayOf(dniMiembro))
+        var existe  = 0
+        if (cursor.moveToFirst()) {
+            existe = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMNA_ID_MIEMBRO))
+
+        }
+        cursor.close()
+
+        return existe
+    }
+
+    @SuppressLint("Range")
+    fun verificarCuotaPagada(miembroId: Int, fechaPago: String): Boolean {
+        val database = readableDatabase
+        val queryVerificarCuota = "SELECT * FROM $TABLA_CUOTA WHERE $COLUMNA_ID_MIEMBRO_CUOTA = ? " +
+                "AND strftime('%m', $COLUMNA_FECHA_PAGO) = strftime('%m', ?) " +
+                "AND strftime('%Y', $COLUMNA_FECHA_PAGO) = strftime('%Y', ?)"
+
+        Log.d("mensaje", "Query: $queryVerificarCuota")
+        Log.d("mensaje", "miembroId: $miembroId, fechaPago: $fechaPago")
+
+        var cuotaPagada = false
+
+        database.rawQuery(queryVerificarCuota, arrayOf(miembroId.toString(), fechaPago, fechaPago)).use { cursor ->
+            cuotaPagada = cursor.count > 0
+            Log.d("mensaje", "Número de filas encontradas: ${cursor.count}")
+
             if (cursor.moveToFirst()) {
-                miembroId = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMNA_ID_MIEMBRO))
-                esSocio = cursor.getInt(cursor.getColumnIndexOrThrow(COLUMNA_ES_SOCIO))
+                do {
+                    val columnNames = cursor.columnNames
+                    val rowData = columnNames.map { columnName ->
+                        "$columnName: ${cursor.getString(cursor.getColumnIndex(columnName))}"
+                    }
+                    Log.d("mensaje", "Fila de datos: ${rowData.joinToString(", ")}")
+                } while (cursor.moveToNext())
             }
         }
 
-        // Verificar si el miembro existe
-        if (miembroId != null) {
-            // Realizar la lógica de pago según el tipo de pago
-            if (tipoPago == 1 && esSocio == 1) {
-                // Verificar si ya pagó la cuota del mes actual
-                val queryVerificarCuota = "SELECT 1 FROM $TABLA_CUOTA WHERE $COLUMNA_ID_MIEMBRO_CUOTA = ? " +
-                        "AND strftime('%m', $COLUMNA_FECHA_PAGO) = strftime('%m', ?) " +
-                        "AND strftime('%Y', $COLUMNA_FECHA_PAGO) = strftime('%Y', ?)"
+        database.close()
+        return cuotaPagada
+    }
+    fun realizarPago(miembroId: Int, monto: Double, fechaPago: String, esSocio: Int, tipoPago: Int): Int {
+        val database = writableDatabase
+        var respuesta = 0
 
-                var cuotaPagada = false
-                database.rawQuery(queryVerificarCuota, arrayOf(miembroId.toString(), fechaPago, fechaPago)).use { cursor ->
-                    cuotaPagada = cursor.count > 0
-                }
-
-                if (!cuotaPagada) {
-                    // Si no ha pagado, realizar el pago de la cuota mensual
-                    val insertCuota = "INSERT INTO $TABLA_CUOTA ($COLUMNA_MONTO, $COLUMNA_FECHA_PAGO, " +
-                            "$COLUMNA_FECHA_VENC_CUOTA, $COLUMNA_ID_MIEMBRO_CUOTA) VALUES (?, ?, DATE($COLUMNA_FECHA_PAGO, '+1 month'), ?)"
-
-                    val argsCuota = arrayOf(monto.toString(), fechaPago, miembroId.toString())
-                    database.execSQL(insertCuota, argsCuota)
-
-                    respuesta = 1 // Pago realizado con éxito
-                } else {
-                    respuesta = 3 // Ya pagó la cuota del mes actual
-                }
-            } else if (tipoPago == 2 && esSocio == 0) {
-                // El pago es de actividad y solo los no socios deben pagarlo
-                val insertCuota = "INSERT INTO $TABLA_CUOTA ($COLUMNA_MONTO, $COLUMNA_FECHA_PAGO, " +
-                        "$COLUMNA_FECHA_VENC_CUOTA, $COLUMNA_ID_MIEMBRO_CUOTA) VALUES (?, ?, DATE($COLUMNA_FECHA_PAGO, '+1 day'), ?)"
-
-                val argsCuota = arrayOf(monto.toString(), fechaPago, miembroId.toString())
-                database.execSQL(insertCuota, argsCuota)
-
-                respuesta = 1 // Pago realizado con éxito
-            } else {
-                respuesta = 0 // No se realizó el pago según la lógica de tipo de pago y membresía
-            }
+        if (tipoPago == 1 && esSocio == 1) {
+            // Si no ha pagado, realizar el pago de la cuota mensual
+            val insertCuota = "INSERT INTO $TABLA_CUOTA ($COLUMNA_MONTO, $COLUMNA_FECHA_PAGO, " +
+                    "$COLUMNA_FECHA_VENC_CUOTA, $COLUMNA_ID_MIEMBRO_CUOTA) VALUES (?, ?, date(?, '+1 month'), ?)"
+            val argsCuota = arrayOf(monto.toString(), fechaPago, fechaPago, miembroId.toString())
+            database.execSQL(insertCuota, argsCuota)
+            respuesta = 1 // Pago realizado con éxito
+        } else if (tipoPago == 2 && esSocio == 0) {
+            // El pago es de actividad y solo los no socios deben pagarlo
+            val insertCuota = "INSERT INTO $TABLA_CUOTA ($COLUMNA_MONTO, $COLUMNA_FECHA_PAGO, " +
+                    "$COLUMNA_FECHA_VENC_CUOTA, $COLUMNA_ID_MIEMBRO_CUOTA) VALUES (?, ?, date(?, '+1 day'), ?)"
+            val argsCuota = arrayOf(monto.toString(), fechaPago, fechaPago, miembroId.toString())
+            database.execSQL(insertCuota, argsCuota)
+            respuesta = 1 // Pago realizado con éxito
         } else {
-            respuesta = -1 // Miembro no encontrado en la base de datos
+            respuesta = 0 // No se realizó el pago según la lógica de tipo de pago y membresía
         }
 
         database.close()
         return respuesta
     }
+
 
     fun nuevoMiembro(
         nombre: String,

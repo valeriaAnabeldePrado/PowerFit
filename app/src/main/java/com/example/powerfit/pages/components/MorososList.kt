@@ -5,66 +5,46 @@ class MorososList {
         val morososListado = listOf<MorosoClass>(
             MorosoClass(
                 "Martita Toledo",
-                351618632,
+                35237899,
                 "martitaT@gmail.com",
-                "28/06/2024"
+                "2024-06-03"
             ),
             MorosoClass(
                 "Pipi Alvarez",
-                351645982,
+                29946382,
                 "laPipi@gmail.com",
-                "28/06/2024"
+                "2024-05-03"
             ),
             MorosoClass(
                 "Pablo Guzman",
-                351611735,
+                35161931,
                 "pablo@gmail.com",
-                "28/06/2024"
+                "2024-02-03"
             ),
             MorosoClass(
                 "Joselina Aguero",
-                351618632,
+                351618937,
                 "joselinaA@gmail.com",
-                "28/06/2024"
+                "2024-01-03"
             ),
             MorosoClass(
-                "Martita Toledo",
-                351618632,
-                "martitaT@gmail.com",
-                "28/06/2024"
+                "Ramon Rodriguez",
+                351618533,
+                "ramon@gmail.com",
+                "2024-06-03"
             ),
             MorosoClass(
-                "Martita Toledo",
-                351618632,
-                "martitaT@gmail.com",
-                "28/06/2024"
-            ),
-            MorosoClass(
-                "Pipi Alvarez",
-                351645982,
-                "laPipi@gmail.com",
-                "28/06/2024"
-            ),
-            MorosoClass(
-                "Pablo Guzman",
-                351611735,
-                "pablo@gmail.com",
-                "28/06/2024"
+                "Roberto Farias",
+                351617390,
+                "robertT@gmail.com",
+                "2024-05-03"
             ),
             MorosoClass(
                 "Joselina Aguero",
-                351618632,
-                "joselinaA@gmail.com",
-                "28/06/2024"
-            ),
-            MorosoClass(
-                "Martita Toledo",
-                351618632,
-                "martitaT@gmail.com",
-                "28/06/2024"
+                35168426,
+                "josefa@gmail.com",
+                "2024-05-03"
             )
-
-
         )
     }
 }
