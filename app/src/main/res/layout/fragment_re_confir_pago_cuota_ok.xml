@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@mipmap/fondonotices"
-    tools:context=".pages.components.navModals.SociosAddCarnetSend">
+    tools:context=".pages.components.navModals.ReConfirPagoCuotaOk">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="40dp"
                 android:text="@string/pages_title"
                 android:textColor="@color/white"
                 android:textSize="20sp"
@@ -41,12 +40,12 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/textView3"
+                android:id="@+id/text_cota_OK"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="16dp"
-                android:text="@string/gestion_sub_title"
+                android:text="texPara"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -62,7 +61,7 @@
                 app:cardCornerRadius="30dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3">
+                app:layout_constraintTop_toBottomOf="@+id/text_cota_OK">
 
                 <androidx.appcompat.widget.LinearLayoutCompat
                     android:layout_width="match_parent"
@@ -74,13 +73,14 @@
                     <ImageView
                         android:layout_width="80dp"
                         android:layout_height="80dp"
-                        android:src="@drawable/feli" />
+                        android:src="@drawable/superhappy" />
 
                     <TextView
+                        android:id="@+id/text_confirm_pagado"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="30dp"
-                        android:text="mensaje de carnet enviado correctamente"
+                        android:text="mensaje de carnet nombre cuota abonada correctamente"
                         android:textAlignment="center"
                         android:textColor="@color/white"
                         android:textSize="20sp" />
@@ -88,11 +88,11 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btn_ver_carnet"
+                android:id="@+id/boton_facturac"
                 android:layout_width="250dp"
                 android:layout_height="70dp"
                 android:background="@drawable/border_button_selector"
-                android:text="@string/btn_socios_carnet_ver"
+                android:text="@string/btn_emitir_factura"
                 android:layout_marginTop="40dp"
                 android:textAllCaps="false"
                 android:textColor="@android:color/white"

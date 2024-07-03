@@ -60,24 +60,44 @@
                     android:textStyle="bold" />
 
                 <TextView
+                    android:id="@+id/text_title_param"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="3dp"
-                    android:text="@string/pacocuota_sub_title"
+                    android:text="definir titulo segun cuota o actividad"
                     android:textSize="16sp" />
 
             </LinearLayout>
-
-            <ImageView
-                android:id="@+id/imageView2"
+            <FrameLayout
+                android:id="@+id/card_flip"
                 android:layout_width="220dp"
                 android:layout_height="120dp"
-                android:contentDescription="@string/logo"
-                android:src="@drawable/tarjeta"
                 android:layout_marginTop="16dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/linearLayout7" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout7">
+
+                <FrameLayout
+                    android:id="@+id/card_face_front"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <include
+                        layout="@layout/card_front"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </FrameLayout>
+                <FrameLayout
+                    android:id="@+id/card_face_back"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:visibility="gone">
+                    <include
+                        layout="@layout/card_back"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"/>
+                </FrameLayout>
+            </FrameLayout>
+
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewPagerCard"
@@ -86,9 +106,8 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
-android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+                app:layout_constraintTop_toBottomOf="@+id/card_flip" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
